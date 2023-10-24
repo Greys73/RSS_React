@@ -9,8 +9,7 @@
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "test": "vitest",
-    "prepare": "cd.. && husky install",
-    "pre-commit": "lint"
+    "prepare": "cd.. && husky install"
   },
   "dependencies": {
     "react": "^18.2.0",
