@@ -10,15 +10,14 @@ module.exports = {
     'plugin:@typescript-eslint/recommended',
     'plugin:react/recommended',
     'plugin:react/jsx-runtime',
+    'plugin:prettier/recommended',
   ],
   overrides: [
     {
       env: {
         node: true,
       },
-      files: [
-        '.eslintrc.{js,cjs}',
-      ],
+      files: ['.eslintrc.{js,cjs}'],
       parserOptions: {
         sourceType: 'script',
       },
@@ -28,12 +27,12 @@ module.exports = {
   parserOptions: {
     ecmaVersion: 'latest',
     sourceType: 'module',
-    project: './react-ts-app/tsconfig.json',
+    project: './tsconfig.json',
+    parser: '@typescript-eslint/parser',
+    tsconfigRootDir: __dirname,
   },
-  plugins: [
-    '@typescript-eslint',
-    'react',
-  ],
+  plugins: ['@typescript-eslint', 'react', 'prettier'],
+  ignorePatterns: ['vite.config.ts'],
   rules: {
     // 'import/extensions': 0,
     '@typescript-eslint/semi': 0,
