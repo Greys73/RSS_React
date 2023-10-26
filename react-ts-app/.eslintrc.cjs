@@ -36,5 +36,7 @@ module.exports = {
   rules: {
     // 'import/extensions': 0,
     '@typescript-eslint/semi': 0,
+    'react/jsx-props-no-spreading': 0,
+    'react/prefer-stateless-function': 0,
   },
 };

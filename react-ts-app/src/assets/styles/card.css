@@ -1,0 +1,42 @@
+* {
+  margin: 0 auto;
+  padding: 0;
+}
+
+.cardsContainer {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.card {
+  background-color: #fbfbf8;
+  width: 20rem;  
+  padding: 0.5rem;
+  border: 0.2rem solid coral;
+  margin: 1rem;
+}
+
+.card__header {
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-size: 1.5rem;
+  text-align: center;
+  padding-bottom: 0.5rem;
+}
+
+.card__data{
+  display: flex;
+  justify-content: center;
+}
+
+.card__data__image>img {
+  height: auto;
+  width: 10rem;
+}
+
+.card__data__desc {
+  font-family: 'Courier New', Courier, monospace;
+}
+.card__data__desc > ul {
+  list-style-type:  none;
+}

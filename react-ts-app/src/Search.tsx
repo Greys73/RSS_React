@@ -1,5 +1,6 @@
 import { Component, ReactNode } from 'react';
 import * as Type from './types';
+import Card from './Card';
 
 const API_URL = 'https://rickandmortyapi.com/api/character';
 
@@ -39,14 +40,11 @@ export default class Search extends Component<
       return <p>LOADING...</p>;
     }
     return (
-      <>
+      <div className="cardsContainer">
         {(list as Type.TCharacter[]).map((item) => (
-          <>
-            <p key={item.id}>{item.name}</p>
-            <img src={item.image} alt={item.type} />
-          </>
+          <Card {...item} key={item.id} />
         ))}
-      </>
+      </div>
     );
   }
 }
