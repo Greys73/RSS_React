@@ -1,12 +1,11 @@
-export type SearchProps = {
-  isLoaded: boolean;
-  error: string;
+export type EnterableInputProps = {
+  placeholder?: string;
+  btnName?: string;
+  onConfirm: (value: string) => void;
 };
 
 export type SearchState = {
-  list: object[];
-  isLoaded: boolean;
-  error: string | null;
+  value: string;
 };
 
 export type TCharacter = {
