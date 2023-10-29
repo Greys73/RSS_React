@@ -3,19 +3,32 @@ import EnterableInput from './EnterableInput';
 import getCharacters from './apiRoot';
 import CardsContainer from './CardsContainer';
 import * as Type from './types';
+import Loader from './Loader';
 
 class App extends Component<
   unknown,
-  { items: Type.TCharacter[]; error: boolean }
+  {
+    items: Type.TCharacter[];
+    error: boolean;
+    isLoading: boolean;
+  }
 > {
   constructor(props: unknown) {
     super(props);
-    this.state = { items: [], error: false };
+    this.state = {
+      items: [],
+      error: false,
+      isLoading: false,
+    };
     this.getSearchString = this.getSearchString.bind(this);
   }
 
   getSearchString(value: string): void {
-    getCharacters(value).then((res) => this.setState({ items: res }));
+    this.setState({ isLoading: true });
+    setTimeout(() => {
+      getCharacters(value).then((res) => this.setState({ items: res }));
+      this.setState({ isLoading: false });
+    }, 300);
   }
 
   render(): ReactNode {
@@ -39,6 +52,7 @@ class App extends Component<
           storageName="SearchCharacterQuery"
         />
         <CardsContainer items={items} />
+        {this.state.isLoading ? <Loader /> : ''}
       </div>
     );
   }

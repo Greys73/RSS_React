@@ -34,7 +34,6 @@ module.exports = {
   plugins: ['@typescript-eslint', 'react', 'prettier'],
   ignorePatterns: ['vite.config.ts'],
   rules: {
-    // 'import/extensions': 0,
     '@typescript-eslint/semi': 0,
     'react/jsx-props-no-spreading': 0,
     'react/prefer-stateless-function': 0,
