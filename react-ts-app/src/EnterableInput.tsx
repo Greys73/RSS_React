@@ -17,6 +17,17 @@ class EnterableInput extends Component<
     this.inputChahge = this.inputChahge.bind(this);
   }
 
+  componentDidMount() {
+    const { onConfirm, storageName } = this.props;
+    if (storageName) {
+      const searchString = localStorage.getItem(storageName) || '';
+      this.setState({
+        value: searchString,
+      });
+      onConfirm(searchString.trim());
+    }
+  }
+
   enterKeyPress(event: React.KeyboardEvent) {
     if (event.key === 'Enter') this.buttonClick();
   }
@@ -26,8 +37,9 @@ class EnterableInput extends Component<
   }
 
   buttonClick() {
-    const { onConfirm } = this.props;
+    const { onConfirm, storageName } = this.props;
     const { value } = this.state;
+    if (storageName) localStorage.setItem(storageName, value);
     onConfirm(value.trim());
   }
 
@@ -38,6 +50,8 @@ class EnterableInput extends Component<
           onChange={this.inputChahge}
           onKeyUp={this.enterKeyPress}
           className="enterableInput__input"
+          placeholder={this.props.placeholder}
+          value={this.state.value}
         />
         <button
           type="button"

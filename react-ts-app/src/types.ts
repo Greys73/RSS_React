@@ -1,6 +1,7 @@
 export type EnterableInputProps = {
   placeholder?: string;
   btnName?: string;
+  storageName?: string;
   onConfirm: (value: string) => void;
 };
 

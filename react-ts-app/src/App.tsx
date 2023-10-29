@@ -1,6 +1,6 @@
 import { Component, ReactNode } from 'react';
 import EnterableInput from './EnterableInput';
-import getData from './apiRoot';
+import getCharacters from './apiRoot';
 import CardsContainer from './CardsContainer';
 import * as Type from './types';
 
@@ -12,14 +12,19 @@ class App extends Component<unknown, { items: Type.TCharacter[] }> {
   }
 
   getSearchString(value: string): void {
-    getData(value).then((res) => this.setState({ items: res }));
+    getCharacters(value).then((res) => this.setState({ items: res }));
   }
 
   render(): ReactNode {
     const { items } = this.state;
     return (
       <div className="main">
-        <EnterableInput btnName="🔍" onConfirm={this.getSearchString} />
+        <EnterableInput
+          btnName="🔍"
+          onConfirm={this.getSearchString}
+          placeholder="Character name"
+          storageName="SearchCharacterQuery"
+        />
         <CardsContainer items={items} />
       </div>
     );

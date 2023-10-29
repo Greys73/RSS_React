@@ -15,6 +15,9 @@
   font-size: 1.5rem;
   padding-left: 0.5rem;
 }
+.enterableInput__input::placeholder {
+  color: #ddd;
+}
 
 .enterableInput__button {
   font-size: 1.5rem;
