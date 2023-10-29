@@ -1,12 +1,13 @@
-* {
-  margin: 0 auto;
-  padding: 0;
-}
-
 .cardsContainer {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
+}
+
+.cardsContainer__nofound {
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  margin-top: 10rem;
+  font-size: 2rem;
 }
 
 .card {

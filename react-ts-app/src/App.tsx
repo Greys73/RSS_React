@@ -18,10 +18,10 @@ class App extends Component<unknown, { items: Type.TCharacter[] }> {
   render(): ReactNode {
     const { items } = this.state;
     return (
-      <>
-        <EnterableInput btnName="SEARCH" onConfirm={this.getSearchString} />
+      <div className="main">
+        <EnterableInput btnName="🔍" onConfirm={this.getSearchString} />
         <CardsContainer items={items} />
-      </>
+      </div>
     );
   }
 }

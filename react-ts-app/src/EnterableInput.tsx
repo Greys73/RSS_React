@@ -1,5 +1,6 @@
 import { Component, ReactNode } from 'react';
 import * as Type from './types';
+import './assets/styles/EnterableInput.css';
 
 class EnterableInput extends Component<
   Type.EnterableInputProps,
@@ -27,14 +28,22 @@ class EnterableInput extends Component<
   buttonClick() {
     const { onConfirm } = this.props;
     const { value } = this.state;
-    onConfirm(value);
+    onConfirm(value.trim());
   }
 
   render(): ReactNode {
     return (
-      <div className="searchContainer">
-        <input onChange={this.inputChahge} onKeyUp={this.enterKeyPress} />
-        <button type="button" onClick={this.buttonClick}>
+      <div className="enterableInput">
+        <input
+          onChange={this.inputChahge}
+          onKeyUp={this.enterKeyPress}
+          className="enterableInput__input"
+        />
+        <button
+          type="button"
+          onClick={this.buttonClick}
+          className="enterableInput__button"
+        >
           {this.props.btnName || 'SEARCH'}
         </button>
       </div>
