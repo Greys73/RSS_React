@@ -10,7 +10,7 @@
     "format:fix": "prettier --ignore-path .gitignore --write \"**/*.+(js|ts|jsx|json)\"",
     "preview": "vite preview",
     "test": "vitest",
-    "prepare": "cd.. && husky install"
+    "prepare": "husky install"
   },
   "dependencies": {
     "react": "^18.2.0",
