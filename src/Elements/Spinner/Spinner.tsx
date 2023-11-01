@@ -1,8 +1,8 @@
 import { Component } from 'react';
-import loadImg from '../public/loader.gif';
-import './assets/styles/loader.css';
+import loadImg from '../../../public/spinner.gif';
+import './Spinner.css';
 
-class Loader extends Component {
+class Spinner extends Component {
   render() {
     return (
       <div className="loader">
@@ -12,4 +12,4 @@ class Loader extends Component {
   }
 }
 
-export default Loader;
+export default Spinner;

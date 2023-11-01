@@ -1,12 +1,9 @@
 import { Component, ReactNode } from 'react';
-import * as Type from './types';
-import './assets/styles/EnterableInput.css';
+import * as Type from '../../model/types';
+import './SearchBar.css';
 
-class EnterableInput extends Component<
-  Type.EnterableInputProps,
-  Type.SearchState
-> {
-  constructor(props: Type.EnterableInputProps) {
+class SearchBar extends Component<Type.SearchBarProps, Type.SearchState> {
+  constructor(props: Type.SearchBarProps) {
     super(props);
     this.state = {
       value: '',
@@ -58,11 +55,11 @@ class EnterableInput extends Component<
           onClick={this.buttonClick}
           className="enterableInput__button"
         >
-          {this.props.btnName || 'SEARCH'}
+          {this.props.btnLogo || 'SEARCH'}
         </button>
       </div>
     );
   }
 }
 
-export default EnterableInput;
+export default SearchBar;

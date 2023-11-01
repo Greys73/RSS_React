@@ -1,6 +1,6 @@
-export type EnterableInputProps = {
+export type SearchBarProps = {
   placeholder?: string;
-  btnName?: string;
+  btnLogo?: string;
   storageName?: string;
   onConfirm: (value: string) => void;
 };

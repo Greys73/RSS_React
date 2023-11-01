@@ -1,9 +1,9 @@
 import { Component, ReactNode } from 'react';
-import EnterableInput from './EnterableInput';
-import getCharacters from './apiRoot';
-import CardsContainer from './CardsContainer';
-import * as Type from './types';
-import Loader from './Loader';
+import EnterableInput from './Components/SearchBar/SearchBar';
+import getCharacters from './model/apiRoot';
+import CardsContainer from './Components/CardsContainer/CardsContainer';
+import * as Type from './model/types';
+import Spinner from './Elements/Spinner/Spinner';
 
 class App extends Component<
   unknown,
@@ -46,13 +46,13 @@ class App extends Component<
           Simulate ERROR
         </button>
         <EnterableInput
-          btnName="🔍"
+          btnLogo="🔍"
           onConfirm={this.getSearchString}
           placeholder="Character name"
           storageName="SearchCharacterQuery"
         />
         <CardsContainer items={items} />
-        {this.state.isLoading ? <Loader /> : ''}
+        {this.state.isLoading ? <Spinner /> : ''}
       </div>
     );
   }

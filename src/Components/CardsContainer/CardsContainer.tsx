@@ -1,6 +1,7 @@
 import { Component, ReactNode } from 'react';
-import * as Type from './types';
-import Card from './Card';
+import * as Type from '../../model/types';
+import Card from '../Card/Card';
+import './CardsContainer.css';
 
 class CardsContainer extends Component<{ items: Type.TCharacter[] }> {
   render(): ReactNode {

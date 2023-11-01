@@ -1,6 +1,6 @@
 import { Component, ReactNode } from 'react';
-import * as Type from './types';
-import './assets/styles/card.css';
+import * as Type from '../../model/types';
+import './Card.css';
 
 export default class Card extends Component<Type.TCharacter> {
   render(): ReactNode {
@@ -17,13 +17,13 @@ export default class Card extends Component<Type.TCharacter> {
           <div className="card__data__desc">
             <ul>
               <li>
-                <strong>Status:</strong> {status}
+                <span className="title">Status:</span> {status}
               </li>
               <li>
-                <strong>Gender:</strong> {gender}
+                <span className="title">Gender:</span> {gender}
               </li>
               <li>
-                <strong>Species:</strong> {species}
+                <span className="title">Species:</span> {species}
               </li>
             </ul>
           </div>

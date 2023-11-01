@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 import { Component, ErrorInfo, ReactNode } from 'react';
-import './assets/styles/ErrorBoundary.css';
+import './ErrorBoundary.css';
 
 type Props = { children: JSX.Element[] | JSX.Element };
 type State = { error: boolean };
