@@ -1,10 +1,25 @@
-const API_URL = 'https://rickandmortyapi.com/api/character';
+const API_URL = 'https://dummyjson.com/products';
 
-const getCharacters = (filter: string = '') => {
-  return fetch(`${API_URL}${filter ? `/?name=${filter}` : ''}`)
+type TGetQuery = {
+  search?: string;
+  limit?: number;
+  pageNumber?: number;
+};
+
+const getProducts = ({
+  search = '',
+  limit = 20,
+  pageNumber = 0,
+}: TGetQuery) => {
+  const skip = pageNumber * limit;
+  return fetch(
+    `${API_URL}${
+      search ? `/search?q=${search}&` : '?'
+    }${`limit=${limit}&skip=${skip}`}`
+  )
     .then((res) => res.json())
-    .then((result) => result.results)
+    .then((result) => result.products)
     .catch((error) => error);
 };
 
-export default getCharacters;
+export default getProducts;

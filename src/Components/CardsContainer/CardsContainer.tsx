@@ -2,7 +2,7 @@ import Card from '../Card/Card';
 import './CardsContainer.css';
 import * as Type from '../../model/types';
 
-type TCardsContainer = { items: Type.TCharacter[] };
+type TCardsContainer = { items: Type.TProduct[] };
 
 function CardsContainer(props: TCardsContainer) {
   const { items } = props;

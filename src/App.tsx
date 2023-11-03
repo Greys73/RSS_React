@@ -1,6 +1,6 @@
 import { useCallback, useState } from 'react';
 import EnterableInput from './Components/SearchBar/SearchBar';
-import getCharacters from './model/apiRoot';
+import getProducts from './model/apiRoot';
 import CardsContainer from './Components/CardsContainer/CardsContainer';
 import Spinner from './Elements/Spinner/Spinner';
 
@@ -12,7 +12,7 @@ function App() {
   const getSearchString = useCallback((value: string) => {
     setisLoading(true);
     setTimeout(() => {
-      getCharacters(value).then((res) => setItems(res));
+      getProducts({ search: value }).then((res) => setItems(res));
       setisLoading(false);
     }, 300);
   }, []);
@@ -33,7 +33,7 @@ function App() {
         btnLogo="🔍"
         onConfirm={getSearchString}
         placeholder="Character name"
-        storageName="SearchCharacterQuery"
+        storageName="RSS_React_SearchProductQuery"
       />
       <CardsContainer items={items} />
       {isLoading ? <Spinner /> : ''}

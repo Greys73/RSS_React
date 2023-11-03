@@ -9,6 +9,7 @@ function SearchBar(props: Type.SearchBarProps) {
   useEffect(() => {
     if (storageName) {
       const searchString = localStorage.getItem(storageName) || '';
+      setValue(searchString);
       onConfirm(searchString);
     }
   }, [onConfirm, storageName]);

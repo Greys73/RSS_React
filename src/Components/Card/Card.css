@@ -1,6 +1,6 @@
 .card {
   background-color: #fbfbf8;
-  width: 20rem;
+  width: 28rem;
   padding: 0.5rem;
   border: 0.2rem solid coral;
   margin: 1rem;
@@ -24,6 +24,7 @@
 }
 
 .card__data__desc {
+  margin-left: 1rem;
   font-family: 'Courier New', Courier, monospace;
 }
 .card__data__desc > ul {
