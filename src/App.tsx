@@ -3,11 +3,13 @@ import EnterableInput from './Components/SearchBar/SearchBar';
 import getProducts from './model/apiRoot';
 import CardsContainer from './Components/CardsContainer/CardsContainer';
 import Spinner from './Elements/Spinner/Spinner';
+import Paginator from './Components/Paginator/Paginator';
 
 function App() {
   const [items, setItems] = useState([]);
-  const [error, setError] = useState(false);
   const [isLoading, setisLoading] = useState(false);
+  const [curPage, setCurPage] = useState(1);
+  const [error, setError] = useState(false);
 
   const getSearchString = useCallback((value: string) => {
     setisLoading(true);
@@ -32,8 +34,13 @@ function App() {
       <EnterableInput
         btnLogo="🔍"
         onConfirm={getSearchString}
-        placeholder="Character name"
+        placeholder="Product name"
         storageName="RSS_React_SearchProductQuery"
+      />
+      <Paginator
+        curPage={curPage}
+        maxVal={10}
+        setPage={(val) => setCurPage(val)}
       />
       <CardsContainer items={items} />
       {isLoading ? <Spinner /> : ''}
