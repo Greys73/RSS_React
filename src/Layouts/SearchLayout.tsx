@@ -22,9 +22,15 @@ function SearchLayout() {
 
   useEffect(() => {
     const globId = searchParams.get('product') || '';
-    getProduct(globId).then((res) => {
-      if (res.id) setCurItem(res || null);
-    });
+    if (globId) {
+      setisLoading(true);
+      setTimeout(() => {
+        getProduct(globId).then((res) => {
+          if (res.id) setCurItem(res || null);
+        });
+        setisLoading(false);
+      }, 200);
+    }
     // setSearchString(searchParams.get('search') || '');
     // setCurPage(parseInt(searchParams.get('page') || '', 10));
     // setCurItem(parseInt(searchParams.get('product') || '', -1));
