@@ -6,3 +6,8 @@
 .main {
   padding: 1rem;
 }
+.mainSection {
+  display: flex;
+  padding: 1rem;
+}
+

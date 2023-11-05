@@ -4,9 +4,11 @@ import getProducts from './model/apiRoot';
 import CardsContainer from './Components/CardsContainer/CardsContainer';
 import Spinner from './Elements/Spinner/Spinner';
 import Paginator from './Components/Paginator/Paginator';
+import ProductCard from './Components/ProductCard/ProductCard';
 
 function App() {
   const [items, setItems] = useState([]);
+  const [curItem, setCurItem] = useState(1);
   const [isLoading, setisLoading] = useState(false);
   const [curPage, setCurPage] = useState(1);
   const [error, setError] = useState(false);
@@ -42,7 +44,11 @@ function App() {
         maxVal={10}
         setPage={(val) => setCurPage(val)}
       />
-      <CardsContainer items={items} />
+      <div className="mainSection">
+        <CardsContainer items={items} />
+        <ProductCard data={items[curItem]} onClose={() => setCurItem(-1)} />
+      </div>
+
       {isLoading ? <Spinner /> : ''}
     </div>
   );

@@ -1,0 +1,43 @@
+.product {
+  background-color: #efe;
+  width: 40rem;
+  padding: 0.5rem;
+  border: 0.2rem solid lightgreen;
+  margin: 1rem 0 1rem 0;
+}
+
+.product__close {
+  position: absolute;
+}
+
+.product__header {
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-size: 2rem;
+  text-align: center;
+  padding-bottom: 0.5rem;
+}
+
+.product__data__image > img {
+  display: flex;
+  height: auto;
+  width: 35rem;
+}
+
+.product__data__desc {
+  margin: 1rem;
+  font-size: 1.3rem;
+  font-family: 'Courier New', Courier, monospace;
+}
+.product__data__desc > ul {
+  list-style-type: none;
+}
+
+.product__data__desc .title {
+  font-weight: bold;
+}
+
+.product__description {
+  margin-left: 1rem;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 1.3rem;
+}
