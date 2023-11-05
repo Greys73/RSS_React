@@ -18,7 +18,7 @@ const getProducts = ({
     }${`limit=${limit}&skip=${skip}`}`
   )
     .then((res) => res.json())
-    .then((result) => result.products)
+    .then((result) => result)
     .catch((error) => error);
 };
 
