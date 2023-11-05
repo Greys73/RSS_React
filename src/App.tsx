@@ -13,24 +13,26 @@ function App() {
   const [pagesCount, setPagesCount] = useState(1);
   const [isLoading, setisLoading] = useState(false);
   const [searchString, setSearchString] = useState('');
-  const [itemsPerPage, setItemsPerPage] = useState(10);
+  const [itemsPerPage, setItemsPerPage] = useState(5);
   const [curPage, setCurPage] = useState(1);
   const [error, setError] = useState(false);
 
   useEffect(() => {
     setisLoading(true);
-    setTimeout(() => {
-      getProducts({
-        search: searchString,
-        limit: itemsPerPage,
-        pageNumber: curPage - 1,
-      }).then((res) => {
-        setPagesCount(Math.floor(res.total / itemsPerPage) || 1);
-        setItems(res.products);
-        setisLoading(false);
-      });
-    }, 300);
+    getProducts({
+      search: searchString,
+      limit: itemsPerPage,
+      pageNumber: curPage - 1,
+    }).then((res) => {
+      setPagesCount(Math.ceil(res.total / itemsPerPage) || 1);
+      setItems(res.products);
+      setisLoading(false);
+    });
   }, [searchString, itemsPerPage, curPage, pagesCount]);
+
+  useEffect(() => {
+    setCurPage(1);
+  }, [searchString, itemsPerPage, pagesCount]);
 
   if (error) throw new Error();
   return (

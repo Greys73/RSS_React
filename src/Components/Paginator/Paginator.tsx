@@ -36,13 +36,21 @@ function Paginator({ curPage, maxVal, setPage }: TPagingtorProps) {
       >
         &#60;&#60;
       </button>
-      <button type="button" onClick={() => calcValue('prev')}>
+      <button
+        type="button"
+        onClick={() => calcValue('prev')}
+        disabled={curPage <= 1}
+      >
         &#60;
       </button>
       <p>
         <span>{curPage}</span> / <sub>{maxVal}</sub>
       </p>
-      <button type="button" onClick={() => calcValue('next')}>
+      <button
+        type="button"
+        onClick={() => calcValue('next')}
+        disabled={curPage >= maxVal}
+      >
         &#62;
       </button>
       <button

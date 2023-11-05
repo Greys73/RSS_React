@@ -8,10 +8,10 @@ function CardsContainer(props: TCardsContainer) {
   const { items } = props;
   return (
     <div className="cardsContainer">
-      {items ? (
+      {items.length ? (
         items.map((item) => <Card {...item} key={item.id} />)
       ) : (
-        <div className="cardsContainer__nofound">Oops! Hero not found.</div>
+        <div className="cardsContainer__nofound">Oops! Nothing was found.</div>
       )}
     </div>
   );
