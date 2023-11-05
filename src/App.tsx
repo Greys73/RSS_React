@@ -7,7 +7,7 @@ import {
 import SearchLayout from './Layouts/SearchLayout';
 
 const router = createBrowserRouter(
-  createRoutesFromElements(<Route path="/" element={<SearchLayout />} />)
+  createRoutesFromElements(<Route index element={<SearchLayout />} />)
 );
 
 function App() {
