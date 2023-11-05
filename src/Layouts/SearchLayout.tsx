@@ -7,7 +7,6 @@ import Spinner from '../Elements/Spinner/Spinner';
 import Paginator from '../Components/Paginator/Paginator';
 import ProductCard from '../Components/ProductCard/ProductCard';
 import Selector from '../Components/Selector/Selector';
-import { TProduct } from '../model/types';
 
 function SearchLayout() {
   const [items, setItems] = useState([]);
@@ -20,21 +19,6 @@ function SearchLayout() {
   const [error, setError] = useState(false);
 
   const [searchParams, setSearchParams] = useSearchParams();
-
-  useEffect(() => {
-    const globId = searchParams.get('product') || '';
-    if (globId) {
-      setisLoading(true);
-      setTimeout(() => {
-        getProduct(globId).then((res) => {
-          if (res.id) setCurItem(res || null);
-        });
-        setisLoading(false);
-      }, 200);
-    } else {
-      setCurItem(null);
-    }
-  }, [searchParams]);
 
   useEffect(() => {
     setisLoading(true);
@@ -56,13 +40,28 @@ function SearchLayout() {
   }, [searchString, itemsPerPage, pagesCount]);
 
   useEffect(() => {
+    const product = searchParams.get('product');
     const queryString = new URLSearchParams();
     if (searchString) queryString.append('search', searchString);
     if (curPage > 1) queryString.append('page', curPage.toString());
-    if (curItem)
-      queryString.append('product', (curItem as TProduct).id.toString());
+    if (product) queryString.append('product', product);
     setSearchParams(queryString);
-  }, [searchString, curItem, curPage, setSearchParams]);
+  }, [searchString, curItem, curPage, setSearchParams, searchParams]);
+
+  useEffect(() => {
+    const globId = searchParams.get('product') || '';
+    if (globId) {
+      setisLoading(true);
+      setTimeout(() => {
+        getProduct(globId).then((res) => {
+          if (res.id) setCurItem(res || null);
+        });
+        setisLoading(false);
+      }, 200);
+    } else {
+      setCurItem(null);
+    }
+  }, [searchParams]);
 
   if (error) throw new Error();
   return (
