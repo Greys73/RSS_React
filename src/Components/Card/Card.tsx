@@ -6,7 +6,8 @@ function Card(props: Type.TProduct) {
   const { id, title, brand, category, thumbnail, price } = props;
   const setSearchParams = useSearchParams()[1];
 
-  function onClick() {
+  function onClick(e: React.MouseEvent<HTMLElement>) {
+    e.stopPropagation();
     setSearchParams({ product: id.toString() });
   }
 

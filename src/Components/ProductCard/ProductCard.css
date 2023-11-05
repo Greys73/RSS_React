@@ -15,6 +15,7 @@
   font-size: 2rem;
   text-align: center;
   padding-bottom: 0.5rem;
+  padding: 0 2rem 0 2rem;
 }
 
 .product__data__image > img {

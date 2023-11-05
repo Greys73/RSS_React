@@ -30,10 +30,9 @@ function SearchLayout() {
         });
         setisLoading(false);
       }, 200);
+    } else {
+      setCurItem(null);
     }
-    // setSearchString(searchParams.get('search') || '');
-    // setCurPage(parseInt(searchParams.get('page') || '', 10));
-    // setCurItem(parseInt(searchParams.get('product') || '', -1));
   }, [searchParams]);
 
   useEffect(() => {
