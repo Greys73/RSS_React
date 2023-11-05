@@ -7,6 +7,7 @@ import Spinner from '../Elements/Spinner/Spinner';
 import Paginator from '../Components/Paginator/Paginator';
 import ProductCard from '../Components/ProductCard/ProductCard';
 import Selector from '../Components/Selector/Selector';
+import { TProduct } from '../model/types';
 
 function SearchLayout() {
   const [items, setItems] = useState([]);
@@ -53,6 +54,15 @@ function SearchLayout() {
   useEffect(() => {
     setCurPage(1);
   }, [searchString, itemsPerPage, pagesCount]);
+
+  useEffect(() => {
+    const queryString = new URLSearchParams();
+    if (searchString) queryString.append('search', searchString);
+    if (curPage > 1) queryString.append('page', curPage.toString());
+    if (curItem)
+      queryString.append('product', (curItem as TProduct).id.toString());
+    setSearchParams(queryString);
+  }, [searchString, curItem, curPage, setSearchParams]);
 
   if (error) throw new Error();
   return (

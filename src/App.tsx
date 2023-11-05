@@ -1,4 +1,5 @@
 import {
+  Navigate,
   Route,
   RouterProvider,
   createBrowserRouter,
@@ -7,7 +8,11 @@ import {
 import SearchLayout from './Layouts/SearchLayout';
 
 const router = createBrowserRouter(
-  createRoutesFromElements(<Route index element={<SearchLayout />} />)
+  createRoutesFromElements(
+    <Route path="/" element={<SearchLayout />}>
+      <Route path="*" element={<Navigate to="/" replace />} />
+    </Route>
+  )
 );
 
 function App() {
