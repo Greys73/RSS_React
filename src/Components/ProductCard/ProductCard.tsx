@@ -4,12 +4,12 @@ import './ProductCard.css';
 import '../../Elements/buttons/Close/roundBtn.css';
 
 type TProductCardProps = {
-  data: TProduct;
+  data: TProduct | null;
   onClose: MouseEventHandler;
 };
 
 function ProductCard({ data, onClose }: TProductCardProps) {
-  return data ? (
+  return data !== null ? (
     <div className="product">
       <button
         type="button"

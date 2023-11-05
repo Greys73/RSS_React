@@ -1,4 +1,4 @@
-// import './Selector.css';
+import './Selector.css';
 
 type TSelector = {
   header: string;
@@ -14,9 +14,9 @@ function Selector({ header, items = ['10', '20', '30'], onSelect }: TSelector) {
     onSelect(value);
   };
   return (
-    <div>
-      <span>{header}</span>
-      <select className="selector" onChange={getValue}>
+    <div className="selector">
+      <span className="selector__header">{header}</span>
+      <select className="selector__list" onChange={getValue}>
         {items.map((item) => (
           <option value={item} key={item}>
             {item}

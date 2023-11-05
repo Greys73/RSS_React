@@ -22,4 +22,11 @@ const getProducts = ({
     .catch((error) => error);
 };
 
+export const getProduct = (id: string) => {
+  return fetch(`${API_URL}/${id}`)
+    .then((res) => res.json())
+    .then((result) => result)
+    .catch((error) => error);
+};
+
 export default getProducts;

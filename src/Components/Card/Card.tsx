@@ -1,10 +1,17 @@
+import { useSearchParams } from 'react-router-dom';
 import './Card.css';
 import * as Type from '../../model/types';
 
 function Card(props: Type.TProduct) {
-  const { title, brand, category, thumbnail, price } = props;
+  const { id, title, brand, category, thumbnail, price } = props;
+  const setSearchParams = useSearchParams()[1];
+
+  function onClick() {
+    setSearchParams({ product: id.toString() });
+  }
+
   return (
-    <div className="card">
+    <div className="card" role="presentation" onClick={onClick}>
       <div className="card__header">
         <p>{title}</p>
       </div>

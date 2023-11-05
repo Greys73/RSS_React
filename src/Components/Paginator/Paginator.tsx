@@ -31,6 +31,7 @@ function Paginator({ curPage, maxVal, setPage }: TPagingtorProps) {
     <div className="paginator">
       <button
         type="button"
+        className="roundBtn"
         onClick={() => calcValue('first')}
         disabled={curPage <= 1}
       >
@@ -38,16 +39,18 @@ function Paginator({ curPage, maxVal, setPage }: TPagingtorProps) {
       </button>
       <button
         type="button"
+        className="roundBtn"
         onClick={() => calcValue('prev')}
         disabled={curPage <= 1}
       >
         &#60;
       </button>
-      <p>
+      <p className="paginator__label">
         <span>{curPage}</span> / <sub>{maxVal}</sub>
       </p>
       <button
         type="button"
+        className="roundBtn"
         onClick={() => calcValue('next')}
         disabled={curPage >= maxVal}
       >
@@ -55,6 +58,7 @@ function Paginator({ curPage, maxVal, setPage }: TPagingtorProps) {
       </button>
       <button
         type="button"
+        className="roundBtn"
         onClick={() => calcValue('last')}
         disabled={curPage >= maxVal}
       >
