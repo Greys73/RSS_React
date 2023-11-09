@@ -1,17 +1,18 @@
 import {
-  Navigate,
   Route,
   RouterProvider,
   createBrowserRouter,
   createRoutesFromElements,
 } from 'react-router-dom';
 import SearchLayout from './Layouts/SearchLayout';
+import NotFound from './Pages/NotFound/NotFound';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path="/" element={<SearchLayout />}>
-      <Route path="*" element={<Navigate to="/" replace />} />
-    </Route>
+    <>
+      <Route path="/" element={<SearchLayout />} />
+      <Route path="*" element={<NotFound />} />
+    </>
   )
 );
 
