@@ -1,18 +1,17 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import * as Type from '../../model/types';
 import './SearchBar.css';
+import SearchContext from '../../model/Context';
 
 function SearchBar(props: Type.SearchBarProps) {
   const [value, setValue] = useState('');
-  const { onConfirm, storageName } = props;
+  const { data, setContextData } = useContext(SearchContext);
+  const { storageName } = props;
 
   useEffect(() => {
-    if (storageName) {
-      const searchString = localStorage.getItem(storageName) || '';
-      setValue(searchString);
-      onConfirm(searchString);
-    }
-  }, [onConfirm, storageName]);
+    if (storageName) setValue(localStorage.getItem(storageName) || '');
+    setValue(data?.searchString || '');
+  }, [data, storageName]);
 
   function inputChahge(event: React.ChangeEvent<HTMLInputElement>) {
     setValue(event.target.value);
@@ -20,7 +19,7 @@ function SearchBar(props: Type.SearchBarProps) {
 
   function buttonClick() {
     if (storageName) localStorage.setItem(storageName, value.trim());
-    onConfirm(value);
+    setContextData({ searchString: value });
   }
 
   function enterKeyPress(event: React.KeyboardEvent) {

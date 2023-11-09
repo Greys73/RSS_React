@@ -1,12 +1,17 @@
+import { useContext } from 'react';
 import './Paginator.css';
+import SearchContext from '../../model/Context';
 
 type TPagingtorProps = {
   curPage: number;
   maxVal: number;
-  setPage: (page: number) => void;
 };
 
-function Paginator({ curPage, maxVal, setPage }: TPagingtorProps) {
+function Paginator({ curPage, maxVal }: TPagingtorProps) {
+  const { setContextData } = useContext(SearchContext);
+
+  const setPage = (val: number) => setContextData({ curPage: val });
+
   const calcValue = (step: string) => {
     switch (step) {
       case 'first':

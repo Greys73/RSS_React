@@ -15,7 +15,7 @@ function CardsContainer(props: TCardsContainer) {
   }
   return (
     <div className="cardsContainer" role="presentation" onClick={onClick}>
-      {items.length ? (
+      {items ? (
         items.map((item) => <Card {...item} key={item.id} />)
       ) : (
         <div className="cardsContainer__nofound">Oops! Nothing was found.</div>

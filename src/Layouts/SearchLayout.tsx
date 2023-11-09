@@ -7,46 +7,73 @@ import Spinner from '../Elements/Spinner/Spinner';
 import Paginator from '../Components/Paginator/Paginator';
 import ProductCard from '../Components/ProductCard/ProductCard';
 import Selector from '../Components/Selector/Selector';
+import SearchContext from '../model/Context';
+import { TSearchContextData } from '../model/types';
 
 function SearchLayout() {
-  const [items, setItems] = useState([]);
-  const [curItem, setCurItem] = useState(null);
-  const [pagesCount, setPagesCount] = useState(1);
+  const [data, setData] = useState<TSearchContextData>({
+    items: null,
+    curItem: null,
+    searchString: '',
+    itemsPerPage: 5,
+    pagesCount: 1,
+    curPage: 1,
+  });
+
   const [isLoading, setisLoading] = useState(false);
-  const [searchString, setSearchString] = useState('');
-  const [itemsPerPage, setItemsPerPage] = useState(5);
-  const [curPage, setCurPage] = useState(1);
   const [error, setError] = useState(false);
 
   const [searchParams, setSearchParams] = useSearchParams();
+
+  const setContextData = (params: object): void => {
+    setData((prev) => {
+      return {
+        ...prev,
+        ...params,
+      };
+    });
+  };
 
   useEffect(() => {
     setisLoading(true);
     setTimeout(() => {
       getProducts({
-        search: searchString,
-        limit: itemsPerPage,
-        pageNumber: curPage - 1,
+        search: data.searchString,
+        limit: data.itemsPerPage,
+        pageNumber: data.curPage - 1,
       }).then((res) => {
-        setPagesCount(Math.ceil(res.total / itemsPerPage) || 1);
-        setItems(res.products);
+        setContextData({
+          items: res.products,
+          pagesCount: Math.ceil(res.total / data.itemsPerPage) || 1,
+        });
         setisLoading(false);
       });
     }, 200);
-  }, [searchString, itemsPerPage, curPage, pagesCount]);
+  }, [data.searchString, data.itemsPerPage, data.curPage, data.pagesCount]);
 
   useEffect(() => {
-    setCurPage(1);
-  }, [searchString, itemsPerPage, pagesCount]);
+    setData((prev) => {
+      return {
+        ...prev,
+        curPage: 1,
+      };
+    });
+  }, [data.searchString, data.itemsPerPage, data.pagesCount]);
 
   useEffect(() => {
     const product = searchParams.get('product');
     const queryString = new URLSearchParams();
-    if (searchString) queryString.append('search', searchString);
-    if (curPage > 1) queryString.append('page', curPage.toString());
+    if (data.searchString) queryString.append('search', data.searchString);
+    if (data.curPage > 1) queryString.append('page', data.curPage.toString());
     if (product) queryString.append('product', product);
     setSearchParams(queryString);
-  }, [searchString, curItem, curPage, setSearchParams, searchParams]);
+  }, [
+    data.searchString,
+    data.curItem,
+    data.curPage,
+    setSearchParams,
+    searchParams,
+  ]);
 
   useEffect(() => {
     const globId = searchParams.get('product') || '';
@@ -54,62 +81,62 @@ function SearchLayout() {
       setisLoading(true);
       setTimeout(() => {
         getProduct(globId).then((res) => {
-          if (res.id) setCurItem(res || null);
+          if (res.id)
+            setData((prev) => {
+              return {
+                ...prev,
+                curItem: res || null,
+              };
+            });
         });
         setisLoading(false);
       }, 200);
-    } else {
-      setCurItem(null);
     }
   }, [searchParams]);
 
   if (error) throw new Error();
   return (
-    <div className="main">
-      <button
-        className="simulaeErrorButton"
-        type="button"
-        onClick={() => {
-          setError(true);
-        }}
-      >
-        Simulate ERROR
-      </button>
-      <SearchBar
-        btnLogo="🔍"
-        onConfirm={(val) => setSearchString(val)}
-        placeholder="Product name"
-        storageName="RSS_React_SearchProductQuery"
-      />
-      <Selector
-        header="Quantity per page: "
-        items={['5', '10', '15', '20']}
-        onSelect={(val) => setItemsPerPage(parseInt(val, 10))}
-      />
-      {!isLoading ? (
-        <Paginator
-          curPage={curPage}
-          maxVal={pagesCount}
-          setPage={(val) => setCurPage(val)}
-        />
-      ) : (
-        ''
-      )}
-
-      <div className="mainSection">
-        <CardsContainer items={items} />
-        <ProductCard
-          data={curItem}
-          onClose={() => {
-            searchParams.delete('product');
-            setSearchParams(searchParams);
-            setCurItem(null);
+    // eslint-disable-next-line react/jsx-no-constructed-context-values
+    <SearchContext.Provider value={{ data, setContextData }}>
+      <div className="main">
+        <button
+          className="simulaeErrorButton"
+          type="button"
+          onClick={() => {
+            setError(true);
           }}
+        >
+          Simulate ERROR
+        </button>
+        <SearchBar
+          btnLogo="🔍"
+          placeholder="Product name"
+          storageName="RSS_React_SearchProductQuery"
         />
-      </div>
+        <Selector
+          header="Quantity per page: "
+          items={['5', '10', '15', '20']}
+        />
+        {!isLoading ? (
+          <Paginator curPage={data.curPage} maxVal={data.pagesCount} />
+        ) : (
+          ''
+        )}
 
-      {isLoading ? <Spinner /> : ''}
-    </div>
+        <div className="mainSection">
+          <CardsContainer items={data.items!} />
+          <ProductCard
+            data={data.curItem}
+            onClose={() => {
+              searchParams.delete('product');
+              setSearchParams(searchParams);
+              setContextData({ curItem: null });
+            }}
+          />
+        </div>
+        {isLoading ? <Spinner /> : ''}
+      </div>
+    </SearchContext.Provider>
   );
 }
 

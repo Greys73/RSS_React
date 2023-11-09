@@ -1,17 +1,20 @@
+import { useContext } from 'react';
 import './Selector.css';
+import SearchContext from '../../model/Context';
 
 type TSelector = {
   header: string;
   items: string[];
-  onSelect: (value: string) => void;
 };
 
-function Selector({ header, items = ['10', '20', '30'], onSelect }: TSelector) {
+function Selector({ header, items = ['10', '20', '30'] }: TSelector) {
+  const { setContextData } = useContext(SearchContext);
   const getValue = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const select = e.target;
     const index = select.selectedIndex;
     const { value } = select.options[index];
-    onSelect(value);
+
+    setContextData({ itemsPerPage: value });
   };
   return (
     <div className="selector">

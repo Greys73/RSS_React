@@ -2,7 +2,6 @@ export type SearchBarProps = {
   placeholder?: string;
   btnLogo?: string;
   storageName?: string;
-  onConfirm: (value: string) => void;
 };
 
 export type SearchState = {
@@ -17,4 +16,13 @@ export type TProduct = {
   category: string;
   price: string;
   thumbnail: string;
+};
+
+export type TSearchContextData = {
+  items: TProduct[] | null;
+  curItem: TProduct | null;
+  pagesCount: number;
+  searchString: string;
+  itemsPerPage: number;
+  curPage: number;
 };
