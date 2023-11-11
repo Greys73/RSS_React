@@ -10,6 +10,7 @@
     "format:fix": "prettier --ignore-path .gitignore --write \"**/*.+(js|ts|jsx|tsx|css|json)\"",
     "preview": "vite preview",
     "test": "vitest --coverage",
+    "preCommitTest": "vitest --watch=false",
     "prepare": "husky install"
   },
   "dependencies": {
