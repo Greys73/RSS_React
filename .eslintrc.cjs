@@ -38,5 +38,16 @@ module.exports = {
     'react/jsx-props-no-spreading': 0,
     'react/prefer-stateless-function': 0,
     'react/destructuring-assignment': 0,
+    'import/no-extraneous-dependencies': [
+      'error',
+      {
+        devDependencies: [
+          'test.{ts,tsx}',
+          'test-*.{ts,tsx}',
+          '**/*{.,_}{test,spec}.{ts,tsx}',
+        ],
+        optionalDependencies: false,
+      },
+    ],
   },
 };

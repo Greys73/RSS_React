@@ -1,21 +1,20 @@
 import { useSearchParams } from 'react-router-dom';
+import { useContext } from 'react';
 import Card from '../Card/Card';
 import './CardsContainer.css';
-import * as Type from '../../model/types';
+import SearchContext from '../../model/Context';
 
-type TCardsContainer = { items: Type.TProduct[] };
-
-function CardsContainer(props: TCardsContainer) {
-  const { items } = props;
+function CardsContainer() {
+  const { data } = useContext(SearchContext);
+  const items = data?.items;
   const [searchParams, setSearchParams] = useSearchParams();
-
   function onClick() {
     searchParams.delete('product');
     setSearchParams(searchParams);
   }
   return (
     <div className="cardsContainer" role="presentation" onClick={onClick}>
-      {items ? (
+      {items && items?.length ? (
         items.map((item) => <Card {...item} key={item.id} />)
       ) : (
         <div className="cardsContainer__nofound">Oops! Nothing was found.</div>

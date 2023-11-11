@@ -124,7 +124,7 @@ function SearchLayout() {
         )}
 
         <div className="mainSection">
-          <CardsContainer items={data.items!} />
+          <CardsContainer />
           <ProductCard
             data={data.curItem}
             onClose={() => {
