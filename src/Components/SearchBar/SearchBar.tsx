@@ -10,7 +10,6 @@ function SearchBar(props: Type.SearchBarProps) {
 
   useEffect(() => {
     if (storageName) setValue(localStorage.getItem(storageName) || '');
-    setValue(data?.searchString || '');
   }, [data, storageName]);
 
   function inputChahge(event: React.ChangeEvent<HTMLInputElement>) {
@@ -32,6 +31,7 @@ function SearchBar(props: Type.SearchBarProps) {
         onChange={inputChahge}
         onKeyUp={enterKeyPress}
         className="enterableInput__input"
+        type="search"
         placeholder={props.placeholder}
         value={value}
       />
