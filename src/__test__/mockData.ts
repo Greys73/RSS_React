@@ -1,4 +1,3 @@
-/* eslint-disable import/prefer-default-export */
 /* eslint-disable prettier/prettier */
 
 import { TSearchContextData } from '../model/types';

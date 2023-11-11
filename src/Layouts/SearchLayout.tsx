@@ -134,6 +134,7 @@ function SearchLayout() {
             }}
           />
         </div>
+
         {isLoading ? <Spinner /> : ''}
       </div>
     </SearchContext.Provider>
