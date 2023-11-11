@@ -1,23 +1,14 @@
-import {
-  Route,
-  RouterProvider,
-  createBrowserRouter,
-  createRoutesFromElements,
-} from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import SearchLayout from './Layouts/SearchLayout';
 import NotFound from './Pages/NotFound/NotFound';
 
-const router = createBrowserRouter(
-  createRoutesFromElements(
-    <>
+function App() {
+  return (
+    <Routes>
       <Route path="/" element={<SearchLayout />} />
       <Route path="*" element={<NotFound />} />
-    </>
-  )
-);
-
-function App() {
-  return <RouterProvider router={router} />;
+    </Routes>
+  );
 }
 
 export default App;

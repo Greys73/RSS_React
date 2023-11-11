@@ -1,7 +1,6 @@
 /* eslint-disable react/jsx-no-constructed-context-values */
 
 // TODO:
-// test renders the relevant card data
 // test card opens a detailed card component
 // test clicking triggers an additional API call
 
