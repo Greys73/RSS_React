@@ -56,7 +56,6 @@ describe('Tests for the Card component', () => {
     await act(async () => {
       await userEvent.click(screen.getByRole('presentation'));
     });
-    data.curItem = data.items![1]!;
     await rerender(jsx(data.curItem!));
     detailCard = screen.queryAllByRole('button').length;
     await expect(detailCard).toBe(1);

@@ -17,7 +17,7 @@ describe('Tests for the ProductCard component', () => {
     expect(screen.getByAltText(/Loading.../i)).toBeInTheDocument();
   });
 
-  test('test renders the relevant card data', async () => {
+  test('test correctly displays the detailed card data', async () => {
     const data = mockData.items![1];
     render(
       <MemoryRouter>

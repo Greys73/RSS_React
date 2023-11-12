@@ -5,7 +5,7 @@ import { describe, expect, test } from 'vitest';
 import App from './App';
 
 describe('App', () => {
-  test('Render App.tsx', () => {
+  test('test Error button on page', () => {
     render(
       <BrowserRouter>
         <App />
