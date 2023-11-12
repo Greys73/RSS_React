@@ -1,8 +1,5 @@
 /* eslint-disable react/jsx-no-constructed-context-values */
 
-// TODO:
-// test clicking triggers an additional API call
-
 import { MemoryRouter, Params } from 'react-router-dom';
 import { act, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
