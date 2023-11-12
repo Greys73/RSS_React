@@ -63,7 +63,11 @@ function SearchLayout() {
     const queryString = new URLSearchParams();
     if (data.searchString) queryString.append('search', data.searchString);
     if (data.curPage > 1) queryString.append('page', data.curPage.toString());
-    if (product) queryString.append('product', product);
+    if (product) {
+      queryString.append('product', product);
+    } else {
+      setContextData({ curItem: null });
+    }
     setSearchParams(queryString);
   }, [
     data.searchString,
