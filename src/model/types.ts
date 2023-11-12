@@ -26,3 +26,10 @@ export type TSearchContextData = {
   itemsPerPage: number;
   curPage: number;
 };
+
+export type TApiData = {
+  products: object[];
+  total: number;
+  skip: number;
+  limit: number;
+};

@@ -36,19 +36,18 @@ function SearchLayout() {
 
   useEffect(() => {
     setisLoading(true);
-    setTimeout(() => {
-      getProducts({
-        search: data.searchString,
-        limit: data.itemsPerPage,
-        pageNumber: data.curPage - 1,
-      }).then((res) => {
-        setContextData({
-          items: res.products,
-          pagesCount: Math.ceil(res.total / data.itemsPerPage) || 1,
-        });
-        setisLoading(false);
+    getProducts({
+      search: data.searchString,
+      limit: data.itemsPerPage,
+      pageNumber: data.curPage - 1,
+    }).then((res) => {
+      console.log(res);
+      setContextData({
+        items: res.products,
+        pagesCount: Math.ceil(res.total / data.itemsPerPage) || 1,
       });
-    }, 200);
+      setisLoading(false);
+    });
   }, [data.searchString, data.itemsPerPage, data.curPage, data.pagesCount]);
 
   useEffect(() => {

@@ -4,7 +4,7 @@ import { describe, expect, test } from 'vitest';
 
 import SearchBar from './SearchBar';
 
-describe('Tests for the Search component', () => {
+describe('Tests for the SearchBar component', () => {
   test('test saves the entered value to the local storage', async () => {
     userEvent.setup();
     const storageName = 'testingNameForSearchInLocalStorage';

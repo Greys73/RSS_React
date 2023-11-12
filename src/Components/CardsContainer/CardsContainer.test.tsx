@@ -8,7 +8,7 @@ import CardsContainer from './CardsContainer';
 import SearchContext from '../../model/Context';
 import { data, emptyData } from '../../__test__/mockData';
 
-describe('CardsContainer component', () => {
+describe('Tests for the CardsContainer component', () => {
   const setContextData = () => {};
 
   test('test number of cards', () => {
