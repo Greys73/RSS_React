@@ -1,5 +1,3 @@
-/* eslint-disable prettier/prettier */
-
 import { TApiData, TSearchContextData } from '../model/types';
 
 export const data: TSearchContextData = {

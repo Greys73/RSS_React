@@ -41,7 +41,6 @@ function SearchLayout() {
       limit: data.itemsPerPage,
       pageNumber: data.curPage - 1,
     }).then((res) => {
-      console.log(res);
       setContextData({
         items: res.products,
         pagesCount: Math.ceil(res.total / data.itemsPerPage) || 1,

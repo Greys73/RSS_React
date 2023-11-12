@@ -1,7 +1,8 @@
+/* eslint-disable import/no-extraneous-dependencies */
 import { BrowserRouter } from 'react-router-dom';
-import { act, render, screen, waitFor } from '@testing-library/react';
+import { act, render } from '@testing-library/react';
 import { userEvent } from '@testing-library/user-event';
-import { beforeEach, describe, expect, test, vi } from 'vitest';
+import { beforeEach, describe, test, vi } from 'vitest';
 
 import App from '../App';
 import { apiData as data } from '../__test__/mockData';
