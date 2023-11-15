@@ -88,7 +88,8 @@ function SearchLayout() {
       }
     }
     if (search !== searchString) dispatch(setSearchString(search));
-    if (page !== data.curPage.toString()) setContextData({ curPage: Number(page) || 1});
+    if (page !== data.curPage.toString())
+      setContextData({ curPage: Number(page) || 1 });
     console.log('AAAAAAAAAAA');
   }, [searchParams]);
 
