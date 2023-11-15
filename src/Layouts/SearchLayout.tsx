@@ -5,7 +5,7 @@ import { useSearchParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../hooks';
 import { TProduct, TSearchContextData } from '../model/types';
 import SearchContext from '../model/Context';
-import getProducts from '../model/apiRoot';
+import getProducts, { getProduct } from '../model/apiRoot';
 // Components
 import SearchBar from '../Components/SearchBar/SearchBar';
 import CardsContainer from '../Components/CardsContainer/CardsContainer';
@@ -14,6 +14,7 @@ import Paginator from '../Components/Paginator/Paginator';
 import ProductCard from '../Components/ProductCard/ProductCard';
 import Selector from '../Components/Selector/Selector';
 import { setCurItem } from '../features/viewModeSlice';
+import { setSearchString } from '../features/searchStringSlice';
 
 function SearchLayout() {
   const [data, setData] = useState<TSearchContextData>({
@@ -75,6 +76,22 @@ function SearchLayout() {
     setSearchParams(queryString);
   }, [searchString, data.curPage, curItem]);
 
+  useEffect(() => {
+    const prod = searchParams.get('product');
+    const search = searchParams.get('search');
+    const page = searchParams.get('page');
+    if (prod && curItem) {
+      if (prod !== (curItem as TProduct)?.id.toString()) {
+        getProduct(prod).then((res) => {
+          if (res.id) dispatch(setCurItem(res || null));
+        });
+      }
+    }
+    if (search !== searchString) dispatch(setSearchString(search));
+    if (page !== data.curPage.toString()) setContextData({ curPage: Number(page) || 1});
+    console.log('AAAAAAAAAAA');
+  }, [searchParams]);
+
   // useEffect(() => {
   //   const globId = searchParams.get('product') || '';
   //   if (globId) {
@@ -121,7 +138,7 @@ function SearchLayout() {
             data={curItem}
             onClose={() => {
               searchParams.delete('product');
-              setSearchParams(searchParams);
+              // setSearchParams(searchParams);
               dispatch(setCurItem(null));
             }}
           />
