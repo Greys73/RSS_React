@@ -1,14 +1,16 @@
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import SearchBar from '../Components/SearchBar/SearchBar';
+import { useAppSelector } from '../hooks';
+import { TSearchContextData } from '../model/types';
+import SearchContext from '../model/Context';
 import getProducts, { getProduct } from '../model/apiRoot';
+// Components
+import SearchBar from '../Components/SearchBar/SearchBar';
 import CardsContainer from '../Components/CardsContainer/CardsContainer';
 import Spinner from '../Elements/Spinner/Spinner';
 import Paginator from '../Components/Paginator/Paginator';
 import ProductCard from '../Components/ProductCard/ProductCard';
 import Selector from '../Components/Selector/Selector';
-import SearchContext from '../model/Context';
-import { TSearchContextData } from '../model/types';
 
 function SearchLayout() {
   const [data, setData] = useState<TSearchContextData>({
@@ -19,6 +21,7 @@ function SearchLayout() {
     pagesCount: 1,
     curPage: 1,
   });
+  const searchString = useAppSelector((state) => state.searchString.value);
 
   const [isLoading, setisLoading] = useState(false);
   const [error, setError] = useState(false);
@@ -37,7 +40,7 @@ function SearchLayout() {
   useEffect(() => {
     setisLoading(true);
     getProducts({
-      search: data.searchString,
+      search: searchString,
       limit: data.itemsPerPage,
       pageNumber: data.curPage - 1,
     }).then((res) => {
@@ -47,7 +50,7 @@ function SearchLayout() {
       });
       setisLoading(false);
     });
-  }, [data.searchString, data.itemsPerPage, data.curPage, data.pagesCount]);
+  }, [searchString, data.itemsPerPage, data.curPage, data.pagesCount]);
 
   useEffect(() => {
     setData((prev) => {
@@ -61,7 +64,7 @@ function SearchLayout() {
   useEffect(() => {
     const product = searchParams.get('product');
     const queryString = new URLSearchParams();
-    if (data.searchString) queryString.append('search', data.searchString);
+    if (searchString) queryString.append('search', searchString);
     if (data.curPage > 1) queryString.append('page', data.curPage.toString());
     if (product) {
       queryString.append('product', product);
@@ -69,13 +72,7 @@ function SearchLayout() {
       setContextData({ curItem: null });
     }
     setSearchParams(queryString);
-  }, [
-    data.searchString,
-    data.curItem,
-    data.curPage,
-    setSearchParams,
-    searchParams,
-  ]);
+  }, [searchString, data.curItem, data.curPage, setSearchParams, searchParams]);
 
   useEffect(() => {
     const globId = searchParams.get('product') || '';

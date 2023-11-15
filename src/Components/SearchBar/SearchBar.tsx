@@ -1,13 +1,12 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import { useEffect, useState } from 'react';
+import { useAppDispatch } from '../../hooks';
+import { setSearchString } from '../../features/searchStringSlice';
 import * as Type from '../../model/types';
 import './SearchBar.css';
-import { setSearchString } from '../../features/searchStringSlice';
-import { useAppDispatch } from '../../hooks';
 
 function SearchBar(props: Type.SearchBarProps) {
   const dispatch = useAppDispatch();
-  // const searchString = useAppSelector((state) => state.searchString.value);
   const [value, setValue] = useState('');
   const { storageName } = props;
 
