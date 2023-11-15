@@ -1,14 +1,19 @@
-import { useSearchParams } from 'react-router-dom';
+// import { useSearchParams } from 'react-router-dom';
 import './Card.css';
 import * as Type from '../../model/types';
+import { useAppDispatch } from '../../hooks';
+import { setCurItem } from '../../features/viewModeSlice';
+import { getProduct } from '../../model/apiRoot';
 
 function Card(props: Type.TProduct) {
   const { id, title, brand, category, thumbnail, price } = props;
-  const setSearchParams = useSearchParams()[1];
+  const dispatch = useAppDispatch();
 
   function onClick(e: React.MouseEvent<HTMLElement>) {
     e.stopPropagation();
-    setSearchParams({ product: id.toString() });
+    getProduct(id.toString()).then((res) => {
+      if (res.id) dispatch(setCurItem(res || null));
+    });
   }
 
   return (

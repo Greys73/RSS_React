@@ -1,9 +1,11 @@
+/* eslint-disable prettier/prettier */
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { useAppSelector } from '../hooks';
-import { TSearchContextData } from '../model/types';
+import { useAppDispatch, useAppSelector } from '../hooks';
+import { TProduct, TSearchContextData } from '../model/types';
 import SearchContext from '../model/Context';
-import getProducts, { getProduct } from '../model/apiRoot';
+import getProducts from '../model/apiRoot';
 // Components
 import SearchBar from '../Components/SearchBar/SearchBar';
 import CardsContainer from '../Components/CardsContainer/CardsContainer';
@@ -11,18 +13,19 @@ import Spinner from '../Elements/Spinner/Spinner';
 import Paginator from '../Components/Paginator/Paginator';
 import ProductCard from '../Components/ProductCard/ProductCard';
 import Selector from '../Components/Selector/Selector';
+import { setCurItem } from '../features/viewModeSlice';
 
 function SearchLayout() {
   const [data, setData] = useState<TSearchContextData>({
     items: null,
-    curItem: null,
-    searchString: '',
-    itemsPerPage: 5,
     pagesCount: 1,
     curPage: 1,
   });
+
+  const dispatch = useAppDispatch();
   const searchString = useAppSelector((state) => state.searchString.value);
   const itemsPerPage = useAppSelector((state) => state.itemsPerPage.count);
+  const curItem = useAppSelector((state) => state.viewMode.curItem);
 
   const [isLoading, setisLoading] = useState(false);
   const [error, setError] = useState(false);
@@ -62,37 +65,25 @@ function SearchLayout() {
     });
   }, [searchString, itemsPerPage, data.pagesCount]);
 
+  // TO URL
   useEffect(() => {
-    const product = searchParams.get('product');
     const queryString = new URLSearchParams();
     if (searchString) queryString.append('search', searchString);
     if (data.curPage > 1) queryString.append('page', data.curPage.toString());
-    if (product) {
-      queryString.append('product', product);
-    } else {
-      setContextData({ curItem: null });
-    }
+    if (curItem) queryString.append('product', (curItem as TProduct).id.toString());
     setSearchParams(queryString);
-  }, [searchString, data.curItem, data.curPage, setSearchParams, searchParams]);
+  }, [searchString, data.curPage, curItem]);
 
-  useEffect(() => {
-    const globId = searchParams.get('product') || '';
-    if (globId) {
-      setisLoading(true);
-      setTimeout(() => {
-        getProduct(globId).then((res) => {
-          if (res.id)
-            setData((prev) => {
-              return {
-                ...prev,
-                curItem: res || null,
-              };
-            });
-        });
-        setisLoading(false);
-      }, 200);
-    }
-  }, [searchParams]);
+  // useEffect(() => {
+  //   const globId = searchParams.get('product') || '';
+  //   if (globId) {
+  //     setisLoading(true);
+  //     getProduct(globId).then((res) => {
+  //       if (res.id) dispatch(setCurItem(res || null));
+  //     });
+  //     setisLoading(false);
+  //   }
+  // }, [curItem]);
 
   if (error) throw new Error();
   return (
@@ -126,11 +117,11 @@ function SearchLayout() {
         <div className="mainSection">
           <CardsContainer />
           <ProductCard
-            data={data.curItem}
+            data={curItem}
             onClose={() => {
               searchParams.delete('product');
               setSearchParams(searchParams);
-              setContextData({ curItem: null });
+              dispatch(setCurItem(null));
             }}
           />
         </div>
