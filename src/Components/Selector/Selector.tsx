@@ -1,6 +1,6 @@
-import { useContext } from 'react';
+import { useAppDispatch } from '../../hooks';
+import { setCount } from '../../features/itemsPerPageSlice';
 import './Selector.css';
-import SearchContext from '../../model/Context';
 
 type TSelector = {
   header: string;
@@ -8,13 +8,12 @@ type TSelector = {
 };
 
 function Selector({ header, items = ['10', '20', '30'] }: TSelector) {
-  const { setContextData } = useContext(SearchContext);
+  const dispatch = useAppDispatch();
   const getValue = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const select = e.target;
     const index = select.selectedIndex;
     const { value } = select.options[index];
-
-    setContextData({ itemsPerPage: value });
+    dispatch(setCount(value));
   };
   return (
     <div className="selector">

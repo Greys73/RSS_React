@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable import/no-extraneous-dependencies */
 import { useEffect, useState } from 'react';
 import { useAppDispatch } from '../../hooks';
@@ -11,7 +12,11 @@ function SearchBar(props: Type.SearchBarProps) {
   const { storageName } = props;
 
   useEffect(() => {
-    if (storageName) setValue(localStorage.getItem(storageName) || '');
+    if (storageName) {
+      const stValue = localStorage.getItem(storageName);
+      setValue(stValue || '');
+      dispatch(setSearchString(stValue));
+    }
   }, [storageName]);
 
   const buttonClick = () => {

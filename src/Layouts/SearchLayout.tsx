@@ -22,6 +22,7 @@ function SearchLayout() {
     curPage: 1,
   });
   const searchString = useAppSelector((state) => state.searchString.value);
+  const itemsPerPage = useAppSelector((state) => state.itemsPerPage.count);
 
   const [isLoading, setisLoading] = useState(false);
   const [error, setError] = useState(false);
@@ -41,16 +42,16 @@ function SearchLayout() {
     setisLoading(true);
     getProducts({
       search: searchString,
-      limit: data.itemsPerPage,
+      limit: itemsPerPage,
       pageNumber: data.curPage - 1,
     }).then((res) => {
       setContextData({
         items: res.products,
-        pagesCount: Math.ceil(res.total / data.itemsPerPage) || 1,
+        pagesCount: Math.ceil(res.total / itemsPerPage) || 1,
       });
       setisLoading(false);
     });
-  }, [searchString, data.itemsPerPage, data.curPage, data.pagesCount]);
+  }, [searchString, itemsPerPage, data.curPage, data.pagesCount]);
 
   useEffect(() => {
     setData((prev) => {
@@ -59,7 +60,7 @@ function SearchLayout() {
         curPage: 1,
       };
     });
-  }, [data.searchString, data.itemsPerPage, data.pagesCount]);
+  }, [searchString, itemsPerPage, data.pagesCount]);
 
   useEffect(() => {
     const product = searchParams.get('product');
