@@ -1,34 +1,35 @@
-import { useState, useEffect, useContext } from 'react';
+/* eslint-disable import/no-extraneous-dependencies */
+import { useEffect, useState } from 'react';
 import * as Type from '../../model/types';
 import './SearchBar.css';
-import SearchContext from '../../model/Context';
+import { setSearchString } from '../../features/searchStringSlice';
+import { useAppDispatch } from '../../hooks';
 
 function SearchBar(props: Type.SearchBarProps) {
+  const dispatch = useAppDispatch();
+  // const searchString = useAppSelector((state) => state.searchString.value);
   const [value, setValue] = useState('');
-  const { data, setContextData } = useContext(SearchContext);
   const { storageName } = props;
 
   useEffect(() => {
     if (storageName) setValue(localStorage.getItem(storageName) || '');
-  }, [data, storageName]);
+  }, [storageName]);
 
-  function inputChahge(event: React.ChangeEvent<HTMLInputElement>) {
-    setValue(event.target.value);
-  }
-
-  function buttonClick() {
+  const buttonClick = () => {
+    dispatch(setSearchString(value));
     if (storageName) localStorage.setItem(storageName, value.trim());
-    setContextData({ searchString: value });
-  }
+  };
 
-  function enterKeyPress(event: React.KeyboardEvent) {
+  const enterKeyPress = (event: React.KeyboardEvent) => {
     if (event.key === 'Enter') buttonClick();
-  }
+  };
 
   return (
     <div className="enterableInput">
       <input
-        onChange={inputChahge}
+        onChange={(e) => {
+          setValue(e.target.value);
+        }}
         onKeyUp={enterKeyPress}
         className="enterableInput__input"
         type="search"
