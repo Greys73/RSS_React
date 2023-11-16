@@ -50,10 +50,10 @@ function SearchLayout() {
   };
 
   useEffect(() => {
-    if(queryData) {
+    if (queryData) {
       const items = queryData.products;
       const pagesCount = Math.ceil(queryData.total / itemsPerPage) || 1;
-      setContextData({items, pagesCount});
+      setContextData({ items, pagesCount });
     }
   }, [queryData]);
 
