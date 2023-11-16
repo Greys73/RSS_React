@@ -5,7 +5,7 @@ import { useSearchParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../hooks';
 import { TProduct, TSearchContextData } from '../model/types';
 import SearchContext from '../model/Context';
-import getProducts, { getProduct } from '../model/apiRoot';
+import { getProduct } from '../model/apiRoot';
 // Components
 import SearchBar from '../Components/SearchBar/SearchBar';
 import CardsContainer from '../Components/CardsContainer/CardsContainer';
@@ -15,20 +15,27 @@ import ProductCard from '../Components/ProductCard/ProductCard';
 import Selector from '../Components/Selector/Selector';
 import { setCurItem } from '../features/viewModeSlice';
 import { setSearchString } from '../features/searchStringSlice';
+import { useGetProductsQuery } from '../model/apiRoots';
 
 function SearchLayout() {
+  const dispatch = useAppDispatch();
+  const searchString = useAppSelector((state) => state.searchString.value);
+  const itemsPerPage = useAppSelector((state) => state.itemsPerPage.count);
+  const curItem = useAppSelector((state) => state.viewMode.curItem);
+
   const [data, setData] = useState<TSearchContextData>({
     items: null,
     pagesCount: 1,
     curPage: 1,
   });
 
-  const dispatch = useAppDispatch();
-  const searchString = useAppSelector((state) => state.searchString.value);
-  const itemsPerPage = useAppSelector((state) => state.itemsPerPage.count);
-  const curItem = useAppSelector((state) => state.viewMode.curItem);
+  const queryData = useGetProductsQuery({
+    search: searchString,
+    limit: itemsPerPage,
+    pageNumber: data.curPage - 1,
+  }).data;
 
-  const [isLoading, setisLoading] = useState(false);
+  const [isLoading] = useState(false);
   const [error, setError] = useState(false);
 
   const [searchParams, setSearchParams] = useSearchParams();
@@ -43,19 +50,12 @@ function SearchLayout() {
   };
 
   useEffect(() => {
-    setisLoading(true);
-    getProducts({
-      search: searchString,
-      limit: itemsPerPage,
-      pageNumber: data.curPage - 1,
-    }).then((res) => {
-      setContextData({
-        items: res.products,
-        pagesCount: Math.ceil(res.total / itemsPerPage) || 1,
-      });
-      setisLoading(false);
-    });
-  }, [searchString, itemsPerPage, data.curPage, data.pagesCount]);
+    if(queryData) {
+      const items = queryData.products;
+      const pagesCount = Math.ceil(queryData.total / itemsPerPage) || 1;
+      setContextData({items, pagesCount});
+    }
+  }, [queryData]);
 
   useEffect(() => {
     setData((prev) => {

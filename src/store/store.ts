@@ -1,5 +1,5 @@
-/* eslint-disable import/no-extraneous-dependencies */
 import { configureStore } from '@reduxjs/toolkit';
+import { productApi } from '../model/apiRoots';
 // Slices
 import searchStringSlice from '../features/searchStringSlice';
 import itemsPerPageSlice from '../features/itemsPerPageSlice';
@@ -10,7 +10,10 @@ const store = configureStore({
     searchString: searchStringSlice,
     itemsPerPage: itemsPerPageSlice,
     viewMode: viewModeSlice,
+    [productApi.reducerPath]: productApi.reducer,
   },
+  middleware: (getDefaultMidlleware) =>
+    getDefaultMidlleware().concat(productApi.middleware),
 });
 
 export default store;
