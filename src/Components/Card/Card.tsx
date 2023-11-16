@@ -2,8 +2,7 @@
 import './Card.css';
 import * as Type from '../../model/types';
 import { useAppDispatch } from '../../hooks';
-import { setCurItem } from '../../features/viewModeSlice';
-import { getProduct } from '../../model/apiRoot';
+import { setCurItemData } from '../../features/viewModeSlice';
 
 function Card(props: Type.TProduct) {
   const { id, title, brand, category, thumbnail, price } = props;
@@ -11,9 +10,10 @@ function Card(props: Type.TProduct) {
 
   function onClick(e: React.MouseEvent<HTMLElement>) {
     e.stopPropagation();
-    getProduct(id.toString()).then((res) => {
-      if (res.id) dispatch(setCurItem(res || null));
-    });
+    dispatch(setCurItemData(id));
+    // getProduct(id.toString()).then((res) => {
+    //   if (res.id) dispatch(setCurItemData(res || null));
+    // });
   }
 
   return (

@@ -1,19 +1,22 @@
-/* eslint-disable import/no-extraneous-dependencies */
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  curItem: null,
+  id: null,
+  data: null,
 };
 
 const viewModeSlice = createSlice({
   name: 'itemsPerPage',
   initialState,
   reducers: {
-    setCurItem: (state, action) => {
-      state.curItem = action.payload;
+    setCurItemId: (state, action) => {
+      state.id = action.payload;
+    },
+    setCurItemData: (state, action) => {
+      state.data = action.payload;
     },
   },
 });
 
-export const { setCurItem } = viewModeSlice.actions;
+export const { setCurItemData, setCurItemId } = viewModeSlice.actions;
 export default viewModeSlice.reducer;

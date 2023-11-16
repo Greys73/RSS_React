@@ -26,7 +26,12 @@ export const productApi = createApi({
         }${`limit=${limit}&skip=${skip}`}`;
       },
     }),
+    getProduct: build.query<TProduct, number | null>({
+      query: (id: number) => {
+        return `products/${id}`;
+      },
+    }),
   }),
 });
 
-export const { useGetProductsQuery } = productApi;
+export const { useGetProductsQuery, useGetProductQuery } = productApi;

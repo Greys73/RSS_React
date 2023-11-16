@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
@@ -13,15 +12,19 @@ import Spinner from '../Elements/Spinner/Spinner';
 import Paginator from '../Components/Paginator/Paginator';
 import ProductCard from '../Components/ProductCard/ProductCard';
 import Selector from '../Components/Selector/Selector';
-import { setCurItem } from '../features/viewModeSlice';
+import { setCurItemData, setCurItemId } from '../features/viewModeSlice';
 import { setSearchString } from '../features/searchStringSlice';
-import { useGetProductsQuery } from '../model/apiRoots';
+import { useGetProductQuery, useGetProductsQuery } from '../model/apiRoots';
 
 function SearchLayout() {
   const dispatch = useAppDispatch();
+
   const searchString = useAppSelector((state) => state.searchString.value);
   const itemsPerPage = useAppSelector((state) => state.itemsPerPage.count);
-  const curItem = useAppSelector((state) => state.viewMode.curItem);
+  const curItem = {
+    id: useAppSelector((state) => state.viewMode.id),
+    data: useAppSelector((state) => state.viewMode.data),
+  };
 
   const [data, setData] = useState<TSearchContextData>({
     items: null,
@@ -29,11 +32,17 @@ function SearchLayout() {
     curPage: 1,
   });
 
-  const queryData = useGetProductsQuery({
+  const queryDetailData = useGetProductQuery(curItem.id).data;
+
+  const queryProductsData = useGetProductsQuery({
     search: searchString,
     limit: itemsPerPage,
     pageNumber: data.curPage - 1,
   }).data;
+
+  useEffect(() => {
+    // console.log(queryDetailData);
+  }, [queryDetailData]);
 
   const [isLoading] = useState(false);
   const [error, setError] = useState(false);
@@ -50,12 +59,12 @@ function SearchLayout() {
   };
 
   useEffect(() => {
-    if (queryData) {
-      const items = queryData.products;
-      const pagesCount = Math.ceil(queryData.total / itemsPerPage) || 1;
+    if (queryProductsData) {
+      const items = queryProductsData.products;
+      const pagesCount = Math.ceil(queryProductsData.total / itemsPerPage) || 1;
       setContextData({ items, pagesCount });
     }
-  }, [queryData]);
+  }, [queryProductsData]);
 
   useEffect(() => {
     setData((prev) => {
@@ -71,38 +80,25 @@ function SearchLayout() {
     const queryString = new URLSearchParams();
     if (searchString) queryString.append('search', searchString);
     if (data.curPage > 1) queryString.append('page', data.curPage.toString());
-    if (curItem)
-      queryString.append('product', (curItem as TProduct).id.toString());
+    if (curItem.id) queryString.append('product', curItem.id);
     setSearchParams(queryString);
-  }, [searchString, data.curPage, curItem]);
+  }, [searchString, data.curPage, curItem.data]);
 
   useEffect(() => {
     const prod = searchParams.get('product');
     const search = searchParams.get('search');
     const page = searchParams.get('page');
-    if (prod && curItem) {
-      if (prod !== (curItem as TProduct)?.id.toString()) {
+    if (prod && curItem.data) {
+      if (prod !== (curItem.data as TProduct)?.id.toString()) {
         getProduct(prod).then((res) => {
-          if (res.id) dispatch(setCurItem(res || null));
+          if (res.id) dispatch(setCurItemData(res || null));
         });
       }
     }
     if (search !== searchString) dispatch(setSearchString(search));
     if (page !== data.curPage.toString())
       setContextData({ curPage: Number(page) || 1 });
-    console.log('AAAAAAAAAAA');
   }, [searchParams]);
-
-  // useEffect(() => {
-  //   const globId = searchParams.get('product') || '';
-  //   if (globId) {
-  //     setisLoading(true);
-  //     getProduct(globId).then((res) => {
-  //       if (res.id) dispatch(setCurItem(res || null));
-  //     });
-  //     setisLoading(false);
-  //   }
-  // }, [curItem]);
 
   if (error) throw new Error();
   return (
@@ -136,11 +132,9 @@ function SearchLayout() {
         <div className="mainSection">
           <CardsContainer />
           <ProductCard
-            data={curItem}
+            data={curItem.data}
             onClose={() => {
-              searchParams.delete('product');
-              // setSearchParams(searchParams);
-              dispatch(setCurItem(null));
+              dispatch(setCurItemId(null));
             }}
           />
         </div>
