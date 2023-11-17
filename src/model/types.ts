@@ -18,11 +18,6 @@ export type TProduct = {
   thumbnail: string;
 };
 
-export type TSearchContextData = {
-  pagesCount: number;
-  curPage: number;
-};
-
 export type TApiData = {
   products: object[];
   total: number;

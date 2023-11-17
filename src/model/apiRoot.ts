@@ -1,4 +1,12 @@
-const API_URL = 'https://dummyjson.com/products';
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { TProduct } from './types';
+
+type TResponse = {
+  products: TProduct[];
+  total: number;
+  skip: number;
+  limit: number;
+};
 
 type TGetQuery = {
   search?: string;
@@ -6,27 +14,24 @@ type TGetQuery = {
   pageNumber?: number;
 };
 
-const getProducts = ({
-  search = '',
-  limit = 20,
-  pageNumber = 0,
-}: TGetQuery) => {
-  const skip = pageNumber * limit;
-  return fetch(
-    `${API_URL}${
-      search ? `/search?q=${search}&` : '?'
-    }${`limit=${limit}&skip=${skip}`}`
-  )
-    .then((res) => res.json())
-    .then((result) => result)
-    .catch((error) => error);
-};
+export const productApi = createApi({
+  reducerPath: 'productApi',
+  baseQuery: fetchBaseQuery({ baseUrl: 'https://dummyjson.com/' }),
+  endpoints: (build) => ({
+    getProducts: build.query<TResponse, TGetQuery>({
+      query: ({ search = '', limit = 20, pageNumber = 0 }: TGetQuery) => {
+        const skip = pageNumber * limit;
+        return `products/${
+          search ? `/search?q=${search}&` : '?'
+        }${`limit=${limit}&skip=${skip}`}`;
+      },
+    }),
+    getProduct: build.query<TProduct, number | null>({
+      query: (id: number) => {
+        return id ? `products/${id}` : '';
+      },
+    }),
+  }),
+});
 
-export const getProduct = (id: string) => {
-  return fetch(`${API_URL}/${id}`)
-    .then((res) => res.json())
-    .then((result) => result)
-    .catch((error) => error);
-};
-
-export default getProducts;
+export const { useGetProductsQuery, useGetProductQuery } = productApi;

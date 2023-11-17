@@ -1,4 +1,3 @@
-// import { useSearchParams } from 'react-router-dom';
 import './Card.css';
 import * as Type from '../../model/types';
 import { useAppDispatch } from '../../hooks';

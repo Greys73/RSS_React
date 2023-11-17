@@ -1,7 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+const searchParams = new URLSearchParams(window.location.search);
+
 const initialState = {
-  curPage: 1,
+  curPage: Number(searchParams.get('page')) || 1,
   pagesCount: 1,
 };
 

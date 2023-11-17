@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { productApi } from '../model/apiRoots';
+import { productApi } from '../model/apiRoot';
 // Slices
 import searchStringSlice from '../features/searchStringSlice';
 import itemsPerPageSlice from '../features/itemsPerPageSlice';
