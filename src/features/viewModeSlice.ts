@@ -1,22 +1,22 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  id: null,
-  data: null,
+  curPage: 1,
+  pagesCount: 1,
 };
 
-const viewModeSlice = createSlice({
+const itemsPerPageSlice = createSlice({
   name: 'itemsPerPage',
   initialState,
   reducers: {
-    setCurItemId: (state, action) => {
-      state.id = action.payload;
+    setCurPage: (state, action) => {
+      state.curPage = action.payload;
     },
-    setCurItemData: (state, action) => {
-      state.data = action.payload;
+    setPagesCount: (state, action) => {
+      state.pagesCount = action.payload;
     },
   },
 });
 
-export const { setCurItemData, setCurItemId } = viewModeSlice.actions;
-export default viewModeSlice.reducer;
+export const { setCurPage, setPagesCount } = itemsPerPageSlice.actions;
+export default itemsPerPageSlice.reducer;

@@ -28,7 +28,7 @@ export const productApi = createApi({
     }),
     getProduct: build.query<TProduct, number | null>({
       query: (id: number) => {
-        return `products/${id}`;
+        return id ? `products/${id}` : '';
       },
     }),
   }),

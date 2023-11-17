@@ -1,5 +1,5 @@
 import { useAppDispatch } from '../../hooks';
-import { setCount } from '../../features/itemsPerPageSlice';
+import { setItemsCount } from '../../features/itemsPerPageSlice';
 import './Selector.css';
 
 type TSelector = {
@@ -13,7 +13,7 @@ function Selector({ header, items = ['10', '20', '30'] }: TSelector) {
     const select = e.target;
     const index = select.selectedIndex;
     const { value } = select.options[index];
-    dispatch(setCount(value));
+    dispatch(setItemsCount(value));
   };
   return (
     <div className="selector">

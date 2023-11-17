@@ -1,12 +1,11 @@
 import { useSearchParams } from 'react-router-dom';
-import { useContext } from 'react';
 import Card from '../Card/Card';
 import './CardsContainer.css';
-import SearchContext from '../../model/Context';
+import { useAppSelector } from '../../hooks';
+import { TProduct } from '../../model/types';
 
 function CardsContainer() {
-  const { data } = useContext(SearchContext);
-  const items = data?.items;
+  const items: TProduct[] = useAppSelector((state) => state.itemsPerPage.data);
   const [searchParams, setSearchParams] = useSearchParams();
   function onClick() {
     searchParams.delete('product');

@@ -19,7 +19,6 @@ export type TProduct = {
 };
 
 export type TSearchContextData = {
-  items: TProduct[] | null;
   pagesCount: number;
   curPage: number;
 };

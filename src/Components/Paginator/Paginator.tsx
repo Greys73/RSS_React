@@ -1,6 +1,6 @@
-import { useContext } from 'react';
 import './Paginator.css';
-import SearchContext from '../../model/Context';
+import { useAppDispatch } from '../../hooks';
+import { setCurPage } from '../../features/viewModeSlice';
 
 type TPagingtorProps = {
   curPage: number;
@@ -8,9 +8,9 @@ type TPagingtorProps = {
 };
 
 function Paginator({ curPage, maxVal }: TPagingtorProps) {
-  const { setContextData } = useContext(SearchContext);
+  const dispatch = useAppDispatch();
 
-  const setPage = (val: number) => setContextData({ curPage: val });
+  const setPage = (val: number) => dispatch(setCurPage(val));
 
   const calcValue = (step: string) => {
     switch (step) {

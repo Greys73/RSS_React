@@ -3,10 +3,12 @@ import { productApi } from '../model/apiRoots';
 // Slices
 import searchStringSlice from '../features/searchStringSlice';
 import itemsPerPageSlice from '../features/itemsPerPageSlice';
+import curItemSlice from '../features/curItemSlice';
 import viewModeSlice from '../features/viewModeSlice';
 
 const store = configureStore({
   reducer: {
+    curItem: curItemSlice,
     searchString: searchStringSlice,
     itemsPerPage: itemsPerPageSlice,
     viewMode: viewModeSlice,
