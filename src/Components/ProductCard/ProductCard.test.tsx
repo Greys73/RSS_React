@@ -1,4 +1,4 @@
-import { BrowserRouter, MemoryRouter } from 'react-router-dom';
+import { MemoryRouter } from 'react-router-dom';
 import { act, render, screen } from '@testing-library/react';
 import { describe, expect, test } from 'vitest';
 
@@ -6,13 +6,14 @@ import userEvent from '@testing-library/user-event';
 import SearchLayout from '../../Layouts/SearchLayout';
 import ProductCard from './ProductCard';
 import { data as mockData } from '../../__test__/mockData';
+import renderWithProviders from '../../__test__/test-utils';
 
 describe('Tests for the ProductCard component', () => {
   test('test loading indicator is displayed', async () => {
-    render(
-      <BrowserRouter>
+    renderWithProviders(
+      <MemoryRouter>
         <SearchLayout />
-      </BrowserRouter>
+      </MemoryRouter>
     );
     expect(screen.getByAltText(/Loading.../i)).toBeInTheDocument();
   });

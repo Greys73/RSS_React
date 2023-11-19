@@ -1,14 +1,15 @@
-import { act, render, screen } from '@testing-library/react';
+import { act, screen } from '@testing-library/react';
 import { userEvent } from '@testing-library/user-event';
 import { describe, expect, test } from 'vitest';
 
 import SearchBar from './SearchBar';
+import renderWithProviders from '../../__test__/test-utils';
 
 describe('Tests for the SearchBar component', () => {
   test('test saves the entered value to the local storage', async () => {
     userEvent.setup();
     const storageName = 'testingNameForSearchInLocalStorage';
-    render(<SearchBar storageName={storageName} />);
+    renderWithProviders(<SearchBar storageName={storageName} />);
     const input = screen.getByRole<HTMLInputElement>('searchbox');
     const button = screen.getByRole('button');
     const value = new Date().toString();
@@ -23,7 +24,7 @@ describe('Tests for the SearchBar component', () => {
   test('test component retrieves the value from the local storage', async () => {
     const storageName = 'testingNameForSearchInLocalStorage';
     const ls = localStorage.getItem(storageName);
-    render(<SearchBar storageName={storageName} />);
+    renderWithProviders(<SearchBar storageName={storageName} />);
     const input = screen.getByRole<HTMLInputElement>('searchbox');
     const { value } = input;
     expect(ls).toBe(value);

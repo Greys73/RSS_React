@@ -51,7 +51,7 @@ function SearchLayout() {
     if (queryProducts.data) {
       dispatch(setItemsData(queryProducts.data.products));
       const PagesCount =
-        Math.ceil(queryProducts.data.total / itemsPerPage) || 1;
+        Math.ceil(queryProducts.data.total / itemsPerPage!) || 1;
       dispatch(setPagesCount(PagesCount));
     }
     dispatch(setItemsIsLoading(queryProducts.isFetching));
@@ -102,8 +102,7 @@ function SearchLayout() {
           }}
         />
       </div>
-      {itemsLoading ? <Spinner /> : ''}
-      {cardLoading ? <Spinner /> : ''}
+      {itemsLoading || cardLoading ? <Spinner /> : ''}
     </div>
   );
 }

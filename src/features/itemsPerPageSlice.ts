@@ -1,6 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { TProduct } from '../model/types';
 
-const initialState = {
+type TInit = {
+  count?: number;
+  data?: TProduct[];
+  isLoading?: boolean;
+};
+
+const initialState: TInit = {
   count: 5,
   data: [],
   isLoading: false,

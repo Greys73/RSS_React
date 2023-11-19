@@ -1,6 +1,6 @@
-import { TApiData, TSearchContextData } from '../model/types';
+import { TApiData } from '../model/types';
 
-export const data: TSearchContextData = {
+export const data = {
   items: [
     {
       id: 1,
@@ -58,13 +58,35 @@ export const data: TSearchContextData = {
   curPage: 1,
 };
 
-export const emptyData: TSearchContextData = {
+export const emptyData = {
   items: null,
   curItem: null,
   searchString: '',
   itemsPerPage: 5,
   pagesCount: 1,
   curPage: 1,
+};
+
+export const emptyStore = {
+  preloadedState: {
+    curItem: {
+      id: null,
+      data: null,
+      isLoading: false,
+    },
+    searchString: {
+      value: '',
+    },
+    itemsPerPage: {
+      count: 5,
+      data,
+      isLoading: false,
+    },
+    viewMode: {
+      curPage: 1,
+      pagesCount: 1,
+    },
+  },
 };
 
 export const apiData: TApiData = {
