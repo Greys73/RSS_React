@@ -8,6 +8,15 @@ export type SearchState = {
   value: string;
 };
 
+export type TSearchContextData = {
+  items: TProduct[] | null;
+  curItem: TProduct | null;
+  pagesCount: number;
+  searchString: string;
+  itemsPerPage: number;
+  curPage: number;
+};
+
 export type TProduct = {
   id: number;
   title: string;
