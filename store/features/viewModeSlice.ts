@@ -8,7 +8,7 @@ const initialState = {
 };
 
 const itemsPerPageSlice = createSlice({
-  name: 'itemsPerPage',
+  name: 'viewMode',
   initialState,
   reducers: {
     setCurPage: (state, action) => {

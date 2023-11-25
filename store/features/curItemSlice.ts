@@ -9,7 +9,7 @@ const initialState = {
 };
 
 const curItemSlice = createSlice({
-  name: 'itemsPerPage',
+  name: 'curItem',
   initialState,
   reducers: {
     setCurItemId: (state, action) => {

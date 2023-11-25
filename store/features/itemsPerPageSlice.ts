@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { TProduct } from '../model/types';
+import { TProduct } from '../../model/types';
 
 type TInit = {
   count?: number;
