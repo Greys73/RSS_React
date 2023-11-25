@@ -1,17 +1,14 @@
 import Card from '../Card/Card';
 import styles from './CardsContainer.module.css';
-import { useAppDispatch, useAppSelector } from '../../hooks';
 import { TProduct } from '../../model/types';
-import { setCurItemData } from '../../store/features/curItemSlice';
+import { useRouter } from 'next/router';
+import { deleteFromQuery } from '@/utils/deleteFromQuery';
 
-function CardsContainer() {
-  const items: TProduct[] = useAppSelector((state) => state.itemsPerPage.data!);
-  // const [searchParams, setSearchParams] = useSearchParams();
-  const dispatch = useAppDispatch();
+function CardsContainer(props: { data: TProduct[] | null }) {
+  const items = props.data;
+  const router = useRouter();
   function onClick() {
-    // searchParams.delete('product');
-    // setSearchParams(searchParams);
-    dispatch(setCurItemData(null));
+    router.push({ query: deleteFromQuery('product') });
   }
   return (
     <div

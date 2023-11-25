@@ -1,14 +1,18 @@
-import { MouseEventHandler } from 'react';
 import { TProduct } from '../../model/types';
 import Image from 'next/image';
 import styles from './ProductCard.module.css';
+import { useRouter } from 'next/router';
+import { deleteFromQuery } from '@/utils/deleteFromQuery';
 
 type TProductCardProps = {
   data: TProduct | null;
-  onClose: MouseEventHandler;
 };
 
-function ProductCard({ data, onClose }: TProductCardProps) {
+function ProductCard({ data }: TProductCardProps) {
+  const router = useRouter();
+  const onClose = () => {
+    router.push({ query: deleteFromQuery('product') });
+  };
   return data !== null ? (
     <div className={styles.product}>
       <button

@@ -1,6 +1,5 @@
 import styles from './Paginator.module.css';
-import { useAppDispatch } from '../../hooks';
-import { setCurPage } from '../../store/features/viewModeSlice';
+import { useRouter } from 'next/router';
 
 type TPagingtorProps = {
   curPage: number;
@@ -8,9 +7,12 @@ type TPagingtorProps = {
 };
 
 function Paginator({ curPage, maxVal }: TPagingtorProps) {
-  const dispatch = useAppDispatch();
+  const router = useRouter();
+  const { query } = router;
 
-  const setPage = (val: number) => dispatch(setCurPage(val));
+  const setPage = (val: number) => {
+    router.push({ query: { ...query, page: val || 1 } });
+  };
 
   const calcValue = (step: string) => {
     switch (step) {

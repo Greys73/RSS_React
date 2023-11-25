@@ -1,5 +1,4 @@
-import { useAppDispatch } from '../../hooks';
-import { setItemsCount } from '../../store/features/itemsPerPageSlice';
+import { useRouter } from 'next/router';
 import styles from './Selector.module.css';
 
 type TSelector = {
@@ -8,12 +7,13 @@ type TSelector = {
 };
 
 function Selector({ header, items = ['10', '20', '30'] }: TSelector) {
-  const dispatch = useAppDispatch();
+  const router = useRouter();
+  const { query } = router;
   const getValue = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const select = e.target;
     const index = select.selectedIndex;
     const { value } = select.options[index];
-    dispatch(setItemsCount(value));
+    router.push({ query: { ...query, limit: value } });
   };
   return (
     <div className={styles.selector}>

@@ -1,16 +1,17 @@
 import styles from './Card.module.css';
 import * as Type from '../../model/types';
-import { useAppDispatch } from '../../hooks';
-import { setCurItemId } from '../../store/features/curItemSlice';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 
 function Card(props: Type.TProduct) {
   const { id, title, brand, category, thumbnail, price } = props;
-  const dispatch = useAppDispatch();
+
+  const router = useRouter();
+  const { query } = router;
 
   function onClick(e: React.MouseEvent<HTMLElement>) {
     e.stopPropagation();
-    dispatch(setCurItemId(id));
+    router.push({ query: { ...query, product: id } });
   }
 
   return (

@@ -1,15 +1,15 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from 'react';
-import { useAppDispatch, useAppSelector } from '../../hooks';
-import { setSearchString } from '../../store/features/searchStringSlice';
+import { useRouter } from 'next/router';
 import * as Type from '../../model/types';
 import styles from './SearchBar.module.css';
+import { deleteFromQuery } from '@/utils/deleteFromQuery';
 
 function SearchBar(props: Type.SearchBarProps) {
-  const dispatch = useAppDispatch();
-  const searchString = useAppSelector((state) => state.searchString.value);
+  const { storageName, searchString } = props;
+  const router = useRouter();
+  const { query } = router;
   const [value, setValue] = useState('');
-  const { storageName } = props;
 
   useEffect(() => {
     if (storageName) {
@@ -19,8 +19,9 @@ function SearchBar(props: Type.SearchBarProps) {
   }, [storageName]);
 
   const buttonClick = () => {
-    dispatch(setSearchString(value));
     if (storageName) localStorage.setItem(storageName, value.trim());
+    if (value) router.push({ query: { ...query, search: value } });
+    else router.push({ query: deleteFromQuery('search') });
   };
 
   const enterKeyPress = (event: React.KeyboardEvent) => {
@@ -36,7 +37,7 @@ function SearchBar(props: Type.SearchBarProps) {
         onKeyUp={enterKeyPress}
         className={styles.enterableInput__input}
         type="search"
-        placeholder={props.placeholder}
+        placeholder="Product name"
         value={value}
       />
       <button
@@ -44,7 +45,7 @@ function SearchBar(props: Type.SearchBarProps) {
         onClick={buttonClick}
         className={styles.enterableInput__button}
       >
-        {props.btnLogo || 'SEARCH'}
+        🔍
       </button>
     </div>
   );

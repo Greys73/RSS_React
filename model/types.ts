@@ -1,6 +1,5 @@
 export type SearchBarProps = {
-  placeholder?: string;
-  btnLogo?: string;
+  searchString: string;
   storageName?: string;
 };
 
