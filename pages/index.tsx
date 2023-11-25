@@ -4,8 +4,9 @@ import { wrapper } from '@/store/store';
 import { getProducts, productApi } from '@/model/apiRoot';
 import { InferGetServerSidePropsType } from 'next/types';
 
-
-export default function Home(props: InferGetServerSidePropsType<typeof getServerSideProps>) {
+export default function Home(
+  props: InferGetServerSidePropsType<typeof getServerSideProps>
+) {
   console.log('===================HOME START========================');
   console.log(props.data);
   console.log('===================HOME FINISH========================');
@@ -27,7 +28,7 @@ export const getServerSideProps = wrapper.getServerSideProps(
       getProducts.initiate({
         search: '',
         limit: 20,
-        pageNumber: 1
+        pageNumber: 1,
       })
     );
     await console.log(data);

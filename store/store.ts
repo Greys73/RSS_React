@@ -1,7 +1,4 @@
-import {
-  combineReducers,
-  configureStore,
-} from '@reduxjs/toolkit';
+import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { productApi } from '../model/apiRoot';
 import { createWrapper } from 'next-redux-wrapper';
 
