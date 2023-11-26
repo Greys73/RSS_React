@@ -3,7 +3,6 @@ import CardsContainer from '../Components/CardsContainer/CardsContainer';
 import ProductCard from '../Components/ProductCard/ProductCard';
 import Paginator from '../Components/Paginator/Paginator';
 import Selector from '../Components/Selector/Selector';
-import Spinner from '../Elements/Spinner/Spinner';
 import { TSearchContextData } from '@/model/types';
 
 type TLayoutData = {

@@ -1,7 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-// const searchParams = new URLSearchParams(window.location.search);
-
 const initialState = {
   id: null,
   data: null,

@@ -2,7 +2,6 @@ import { act, render, screen } from '@testing-library/react';
 import { describe, expect, test, vi } from 'vitest';
 
 import userEvent from '@testing-library/user-event';
-import SearchLayout from '../../Layouts/SearchLayout';
 import ProductCard from './ProductCard';
 import { data as mockData } from '../../__test__/mockData';
 

@@ -2,7 +2,6 @@ import { wrapper } from '@/store/store';
 import { getProduct, getProducts, productApi } from '@/model/apiRoot';
 import { InferGetServerSidePropsType } from 'next/types';
 import SearchLayout from '@/Layouts/SearchLayout';
-import ErrorBoundary from '@/Components/ErrorBoundary/ErrorBoundary';
 import {
   setItemsCount,
   setItemsData,
