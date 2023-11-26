@@ -20,7 +20,7 @@ function SearchBar(props: Type.SearchBarProps) {
 
   const buttonClick = () => {
     if (storageName) localStorage.setItem(storageName, value.trim());
-    if (value) router.push({ query: { ...query, search: value } });
+    if (value) router.push({ query: { ...query, search: value, page: 1 } });
     else router.push({ query: deleteFromQuery('search') });
   };
 

@@ -9,7 +9,9 @@ describe('Tests for the SearchBar component', () => {
   test('test saves the entered value to the local storage', async () => {
     userEvent.setup();
     const storageName = 'testingNameForSearchInLocalStorage';
-    renderWithProviders(<SearchBar storageName={storageName} />);
+    renderWithProviders(
+      <SearchBar storageName={storageName} searchString={''} />
+    );
     const input = screen.getByRole<HTMLInputElement>('searchbox');
     const button = screen.getByRole('button');
     const value = new Date().toString();
@@ -24,7 +26,9 @@ describe('Tests for the SearchBar component', () => {
   test('test component retrieves the value from the local storage', async () => {
     const storageName = 'testingNameForSearchInLocalStorage';
     const ls = localStorage.getItem(storageName);
-    renderWithProviders(<SearchBar storageName={storageName} />);
+    renderWithProviders(
+      <SearchBar storageName={storageName} searchString={''} />
+    );
     const input = screen.getByRole<HTMLInputElement>('searchbox');
     const { value } = input;
     expect(ls).toBe(value);

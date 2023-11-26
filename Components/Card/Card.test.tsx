@@ -1,4 +1,3 @@
-import { MemoryRouter, Params } from 'react-router-dom';
 import { act, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { describe, expect, test, vi } from 'vitest';
@@ -12,26 +11,13 @@ import { TProduct } from '../../model/types';
 import renderWithProviders from '../../__test__/test-utils';
 import { setupStore } from '../../store/store';
 
-vi.mock('react-router-dom', async () => {
-  const mod: Readonly<Params<string>> =
-    await vi.importActual('react-router-dom');
-  return {
-    ...mod,
-    useSearchParams: () => [{}, setSearchParams],
-  };
-});
-
 const store = setupStore();
 
 describe('Tests for the Card component', () => {
   const item = data.items![1];
 
   test('test renders the relevant card data', () => {
-    renderWithProviders(
-      <MemoryRouter>
-        <Card {...item} key={item.id} />
-      </MemoryRouter>
-    );
+    renderWithProviders(<Card {...item} key={item.id} />);
 
     expect(screen.getByAltText(item.title)).toBeInTheDocument();
     expect(screen.getByText(item.title)).toBeInTheDocument();
@@ -45,10 +31,8 @@ describe('Tests for the Card component', () => {
 
     const jsx = (cardData: TProduct) => (
       <Provider store={store}>
-        <MemoryRouter>
-          <Card {...item} key={item.id} />
-          <ProductCard data={cardData || null} onClose={() => {}} />
-        </MemoryRouter>
+        <Card {...item} key={item.id} />
+        <ProductCard data={cardData || null} />
       </Provider>
     );
     const { rerender } = renderWithProviders(

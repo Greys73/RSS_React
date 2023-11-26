@@ -2,6 +2,7 @@ import { wrapper } from '@/store/store';
 import { getProduct, getProducts, productApi } from '@/model/apiRoot';
 import { InferGetServerSidePropsType } from 'next/types';
 import SearchLayout from '@/Layouts/SearchLayout';
+import ErrorBoundary from '@/Components/ErrorBoundary/ErrorBoundary';
 import {
   setItemsCount,
   setItemsData,
@@ -14,7 +15,11 @@ export default function Home(
   props: InferGetServerSidePropsType<typeof getServerSideProps>
 ) {
   const data: TSearchContextData = props.data;
-  return <SearchLayout data={data} />;
+  return (
+    <ErrorBoundary>
+      <SearchLayout data={data} />
+    </ErrorBoundary>
+  );
 }
 
 export const getServerSideProps = wrapper.getServerSideProps(
@@ -55,7 +60,7 @@ export const getServerSideProps = wrapper.getServerSideProps(
           pagesCount: store.getState().viewMode.pagesCount,
           searchString: store.getState().searchString.value,
           itemsPerPage: store.getState().itemsPerPage.count || 5,
-          curPage: store.getState().viewMode.curPage,
+          curPage: store.getState().viewMode.curPage || 1,
         },
       },
     };

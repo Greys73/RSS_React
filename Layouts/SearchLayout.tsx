@@ -19,7 +19,7 @@ function SearchLayout(props: TLayoutData) {
         className="simulaeErrorButton"
         type="button"
         onClick={() => {
-          throw Error;
+          throw new Error('test error');
         }}
       >
         Simulate ERROR

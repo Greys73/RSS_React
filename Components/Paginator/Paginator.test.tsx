@@ -1,4 +1,3 @@
-import { BrowserRouter } from 'react-router-dom';
 import { act, render, screen } from '@testing-library/react';
 import { userEvent } from '@testing-library/user-event';
 import { beforeEach, describe, expect, test } from 'vitest';
@@ -16,9 +15,7 @@ describe('Tests for the Paginator component', () => {
   beforeEach(() => {
     render(
       <Provider store={store}>
-        <BrowserRouter>
-          <Paginator curPage={startPage} maxVal={maxPages} />
-        </BrowserRouter>
+        <Paginator curPage={startPage} maxVal={maxPages} />
       </Provider>
     );
     userEvent.setup();

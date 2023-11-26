@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import { Component, ErrorInfo, ReactNode } from 'react';
 import styles from './ErrorBoundary.module.css';
 

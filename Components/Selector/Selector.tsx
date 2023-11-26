@@ -13,7 +13,7 @@ function Selector({ header, items = ['10', '20', '30'] }: TSelector) {
     const select = e.target;
     const index = select.selectedIndex;
     const { value } = select.options[index];
-    router.push({ query: { ...query, limit: value } });
+    router.push({ query: { ...query, limit: value, page: 1 } });
   };
   return (
     <div className={styles.selector}>
