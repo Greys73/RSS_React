@@ -1,0 +1,20 @@
+import styles from './Spinner.module.css';
+import loadImg from '../../public/spinner.gif';
+import Image from 'next/image';
+
+function Spinner() {
+  return (
+    <div className={styles.loader}>
+      <Image
+        className={styles.loader__image}
+        src={loadImg}
+        alt="Loading..."
+        width={100}
+        height={100}
+        style={{ objectFit: 'contain' }}
+      />
+    </div>
+  );
+}
+
+export default Spinner;
