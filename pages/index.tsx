@@ -26,7 +26,7 @@ export const getServerSideProps = wrapper.getServerSideProps(
       getProducts.initiate({
         search: search?.toString() || '',
         limit: Number(limit) || 5,
-        pageNumber: Number(page) - 1 || 1,
+        pageNumber: Number(page) - 1,
       })
     );
     if (queryProducts.data) {

@@ -9,8 +9,8 @@ function Spinner() {
         className={styles.loader__image}
         src={loadImg}
         alt="Loading..."
-        width={500}
-        height={500}
+        width={100}
+        height={100}
         style={{ objectFit: 'contain' }}
       />
     </div>

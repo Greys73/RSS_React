@@ -4,7 +4,13 @@ import Image from 'next/image';
 function Page404() {
   return (
     <div className="notFound">
-      <Image className="notFound__image" src={loadImg} alt="Page not found" />
+      <Image
+        className="notFound__image"
+        src={loadImg}
+        alt="Page not found"
+        width={500}
+        height={500}
+      />
       <button
         type="button"
         className="notFound__button"

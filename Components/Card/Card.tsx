@@ -21,7 +21,13 @@ function Card(props: Type.TProduct) {
       </div>
       <div className={styles.card__data}>
         <div className={styles.card__data__image}>
-          <Image src={thumbnail} alt={title} width={500} height={500} />
+          <Image
+            src={thumbnail}
+            alt={title}
+            width={500}
+            height={500}
+            priority={true}
+          />
         </div>
         <div className={styles.card__data__desc}>
           <ul>
