@@ -6,15 +6,16 @@ import { setupStore } from '../../store/store';
 import setSearchParams from '../../__test__/mockUtils';
 import { NextRouter } from 'next/router';
 
-vi.mock("next/router", () => ({
+vi.mock('next/router', () => ({
   useRouter() {
-      return {
-          route: "/",
-          pathname: "",
-          query: "",
-          asPath: "",
-          push: (query:NextRouter) => setSearchParams({'curPage': query.query.page}),
-      };
+    return {
+      route: '/',
+      pathname: '',
+      query: '',
+      asPath: '',
+      push: (query: NextRouter) =>
+        setSearchParams({ curPage: query.query.page }),
+    };
   },
 }));
 

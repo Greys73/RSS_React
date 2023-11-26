@@ -6,16 +6,15 @@ import userEvent from '@testing-library/user-event';
 import { TProduct } from '@/model/types';
 import ProductCard from '../ProductCard/ProductCard';
 
-
-vi.mock("next/router", () => ({
+vi.mock('next/router', () => ({
   useRouter() {
-      return {
-          route: "/",
-          pathname: "",
-          query: "",
-          asPath: "",
-          push: vi.fn(),
-      };
+    return {
+      route: '/',
+      pathname: '',
+      query: '',
+      asPath: '',
+      push: vi.fn(),
+    };
   },
 }));
 
@@ -36,10 +35,10 @@ describe('Tests for the Card component', () => {
     userEvent.setup();
 
     const jsx = (cardData: TProduct) => (
-        <>
-          <Card {...item} key={item.id} />
-          <ProductCard data={cardData || null} />
-        </>
+      <>
+        <Card {...item} key={item.id} />
+        <ProductCard data={cardData || null} />
+      </>
     );
     const { rerender } = render(jsx(data.items[-1]));
     let detailCard = screen.queryAllByRole('button').length;

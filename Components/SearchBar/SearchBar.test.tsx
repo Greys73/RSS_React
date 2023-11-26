@@ -5,15 +5,15 @@ import { describe, expect, test, vi } from 'vitest';
 import SearchBar from './SearchBar';
 import renderWithProviders from '../../__test__/test-utils';
 
-vi.mock("next/router", () => ({
+vi.mock('next/router', () => ({
   useRouter() {
-      return {
-          route: "/",
-          pathname: "",
-          query: "",
-          asPath: "",
-          push: vi.fn(),
-      };
+    return {
+      route: '/',
+      pathname: '',
+      query: '',
+      asPath: '',
+      push: vi.fn(),
+    };
   },
 }));
 

@@ -6,15 +6,15 @@ import SearchLayout from '../../Layouts/SearchLayout';
 import ProductCard from './ProductCard';
 import { data as mockData } from '../../__test__/mockData';
 
-vi.mock("next/router", () => ({
+vi.mock('next/router', () => ({
   useRouter() {
-      return {
-          route: "/",
-          pathname: "",
-          query: "",
-          asPath: "",
-          push: vi.fn(),
-      };
+    return {
+      route: '/',
+      pathname: '',
+      query: '',
+      asPath: '',
+      push: vi.fn(),
+    };
   },
 }));
 
