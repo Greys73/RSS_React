@@ -15,11 +15,7 @@ export default function Home(
   props: InferGetServerSidePropsType<typeof getServerSideProps>
 ) {
   const data: TSearchContextData = props.data;
-  return (
-    <ErrorBoundary>
-      <SearchLayout data={data} />
-    </ErrorBoundary>
-  );
+  return <SearchLayout data={data} />;
 }
 
 export const getServerSideProps = wrapper.getServerSideProps(
