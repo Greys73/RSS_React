@@ -4,6 +4,7 @@ const nextConfig = {
   images: {
     domains: ['i.dummyjson.com'],
   },
+  distDir: 'dist',
 };
 
 module.exports = nextConfig;
