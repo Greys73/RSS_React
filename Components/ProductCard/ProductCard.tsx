@@ -2,7 +2,7 @@ import { TProduct } from '../../model/types';
 import Image from 'next/image';
 import styles from './ProductCard.module.css';
 import { useRouter } from 'next/router';
-import { deleteFromQuery } from '@/utils/deleteFromQuery';
+import { deleteFromQuery } from '../../utils/deleteFromQuery';
 
 type TProductCardProps = {
   data: TProduct | null;

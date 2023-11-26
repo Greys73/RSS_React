@@ -1,23 +1,29 @@
-import { act, screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
+import { act, render, screen } from '@testing-library/react';
 import { describe, expect, test, vi } from 'vitest';
-
-import { Provider } from 'react-redux';
 import Card from './Card';
 import { data } from '../../__test__/mockData';
+import userEvent from '@testing-library/user-event';
+import { TProduct } from '@/model/types';
 import ProductCard from '../ProductCard/ProductCard';
-import setSearchParams from '../../__test__/mockUtils';
-import { TProduct } from '../../model/types';
-import renderWithProviders from '../../__test__/test-utils';
-import { setupStore } from '../../store/store';
 
-const store = setupStore();
+
+vi.mock("next/router", () => ({
+  useRouter() {
+      return {
+          route: "/",
+          pathname: "",
+          query: "",
+          asPath: "",
+          push: vi.fn(),
+      };
+  },
+}));
 
 describe('Tests for the Card component', () => {
   const item = data.items![1];
 
   test('test renders the relevant card data', () => {
-    renderWithProviders(<Card {...item} key={item.id} />);
+    render(<Card {...item} />);
 
     expect(screen.getByAltText(item.title)).toBeInTheDocument();
     expect(screen.getByText(item.title)).toBeInTheDocument();
@@ -30,20 +36,18 @@ describe('Tests for the Card component', () => {
     userEvent.setup();
 
     const jsx = (cardData: TProduct) => (
-      <Provider store={store}>
-        <Card {...item} key={item.id} />
-        <ProductCard data={cardData || null} />
-      </Provider>
+        <>
+          <Card {...item} key={item.id} />
+          <ProductCard data={cardData || null} />
+        </>
     );
-    const { rerender } = renderWithProviders(
-      jsx(data.items[store.getState().curItem.id!])
-    );
+    const { rerender } = render(jsx(data.items[-1]));
     let detailCard = screen.queryAllByRole('button').length;
     await expect(detailCard).toBe(0);
     await act(async () => {
       await userEvent.click(screen.getByRole('presentation'));
     });
-    await rerender(jsx(data.items[store.getState().curItem.id!]));
+    await rerender(jsx(data.items[1]));
     detailCard = screen.queryAllByRole('button').length;
     await expect(detailCard).toBe(1);
   });

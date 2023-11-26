@@ -2,7 +2,7 @@ import Card from '../Card/Card';
 import styles from './CardsContainer.module.css';
 import { TProduct } from '../../model/types';
 import { useRouter } from 'next/router';
-import { deleteFromQuery } from '@/utils/deleteFromQuery';
+import { deleteFromQuery } from '../../utils/deleteFromQuery';
 
 function CardsContainer(props: { data: TProduct[] | null }) {
   const items = props.data;

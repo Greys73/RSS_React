@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import * as Type from '../../model/types';
 import styles from './SearchBar.module.css';
-import { deleteFromQuery } from '@/utils/deleteFromQuery';
+import { deleteFromQuery } from '../../utils/deleteFromQuery';
 
 function SearchBar(props: Type.SearchBarProps) {
   const { storageName, searchString } = props;

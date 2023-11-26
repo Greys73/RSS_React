@@ -1,9 +1,21 @@
 import { act, screen } from '@testing-library/react';
 import { userEvent } from '@testing-library/user-event';
-import { describe, expect, test } from 'vitest';
+import { describe, expect, test, vi } from 'vitest';
 
 import SearchBar from './SearchBar';
 import renderWithProviders from '../../__test__/test-utils';
+
+vi.mock("next/router", () => ({
+  useRouter() {
+      return {
+          route: "/",
+          pathname: "",
+          query: "",
+          asPath: "",
+          push: vi.fn(),
+      };
+  },
+}));
 
 describe('Tests for the SearchBar component', () => {
   test('test saves the entered value to the local storage', async () => {
