@@ -1,25 +1,29 @@
 import { createSlice } from '@reduxjs/toolkit';
+import IFormData from '../../assets/types';
 
-const initialState = {
-  name: 'Jonh Doe',
-  age: 18,
-  email: 'john@mail.com',
-  password: 'qwerty',
-  gender: 'male',
-  accept: false,
-  picture: '',
-  countru: 'Moscow',
-};
+export const initialState: IFormData[] = [
+  {
+    name: '',
+    age: 0,
+    email: '',
+    password: '',
+    confirmPass: '',
+    gender: '',
+    accept: false,
+    picture: '',
+    country: '',
+  },
+];
 
 const formDataSlice = createSlice({
-  name: 'itemsPerPage',
+  name: 'formData',
   initialState,
   reducers: {
-    setName: (state, action) => {
-      state.name = action.payload;
+    setData: (state, action) => {
+      state.push(action.payload);
     },
   },
 });
 
-export const { setName } = formDataSlice.actions;
+export const { setData } = formDataSlice.actions;
 export default formDataSlice.reducer;
