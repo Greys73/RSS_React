@@ -3,15 +3,15 @@ import IFormData from '../../assets/types';
 
 export const initialState: IFormData[] = [
   {
-    name: '',
+    name: 'Name',
     age: 0,
-    email: '',
-    password: '',
-    confirmPass: '',
-    gender: '',
+    email: 'user@mail.com',
+    password: '1Aa#',
+    confirmPass: '1Aa#',
+    gender: 'male',
     accept: false,
     picture: '',
-    country: '',
+    country: 'Argentina',
   },
 ];
 
@@ -19,11 +19,11 @@ const formDataSlice = createSlice({
   name: 'formData',
   initialState,
   reducers: {
-    setData: (state, action) => {
+    setFormData: (state, action) => {
       state.push(action.payload);
     },
   },
 });
 
-export const { setData } = formDataSlice.actions;
+export const { setFormData } = formDataSlice.actions;
 export default formDataSlice.reducer;

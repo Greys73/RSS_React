@@ -1,4 +1,5 @@
 import * as yup from 'yup';
+import { fileExtCheck, fileSizeCheck } from '../utils/fileCheckers';
 
 const REQUIRED_MSG = 'This field is required!';
 
@@ -32,9 +33,22 @@ const schema = yup.object().shape({
 
   gender: yup.string().required(REQUIRED_MSG),
 
-  accept: yup.boolean().required(REQUIRED_MSG),
+  accept: yup.boolean().test('accept', 'Should be accepted', (val) => val),
 
-  picture: yup.string().required(REQUIRED_MSG),
+  picture: yup
+    .mixed<FileList>()
+    .test(
+      'fileSize',
+      'File size should be less than 1mb',
+      (files) => files && fileSizeCheck({ files, size: 1000000 })
+    )
+    .test(
+      'fileExt',
+      'File extension should be png or jpg/jpeg',
+      (files) =>
+        files &&
+        fileExtCheck({ files, extentions: ['image/png', 'image/jpeg'] })
+    ),
 
   country: yup.string().required(REQUIRED_MSG),
 });

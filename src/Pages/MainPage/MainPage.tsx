@@ -1,12 +1,15 @@
 import { Link } from 'react-router-dom';
+import FormsCollection from '../../Components/FormsCollection/FormsCollection';
 
 function MainPage() {
   return (
     <div>
-      <header>Main Page</header>
-      <main>
+      <header>
         <Link to="useref">Uncontrolled</Link>
         <Link to="usestate">Controlled</Link>
+      </header>
+      <main>
+        <FormsCollection />
       </main>
     </div>
   );

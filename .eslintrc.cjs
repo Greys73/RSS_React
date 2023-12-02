@@ -38,6 +38,7 @@ module.exports = {
     'react/jsx-props-no-spreading': 0,
     'react/prefer-stateless-function': 0,
     'react/destructuring-assignment': 0,
+    'react/no-array-index-key': 0,
     'import/no-extraneous-dependencies': [
       'error',
       {
