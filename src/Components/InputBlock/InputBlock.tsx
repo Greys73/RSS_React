@@ -1,37 +1,30 @@
 /* eslint-disable react/require-default-props */
 import { RefObject } from 'react';
 import { UseFormRegisterReturn } from 'react-hook-form';
-import { useAppSelector } from '../../hooks';
 
 type TProps = {
   useForm?: UseFormRegisterReturn<string>;
   useRef?: RefObject<HTMLInputElement>;
   label: string;
   error: string | undefined;
+  type: string;
 };
 
-function CountrySelector({ useForm, useRef, label, error }: TProps) {
-  const countries = useAppSelector((store) => store.countries);
+function InputBlock({ useForm, useRef, label, error, type }: TProps) {
   return (
     <div className="form__element">
       <p className="form__element-label">{label}:</p>
       <input
-        type="text"
-        list="datalist"
+        className={type === 'text' ? 'form__element-input' : ''}
         {...useForm}
+        placeholder={label}
+        type={type}
         ref={useRef}
-        autoComplete="on"
+        autoComplete={label.toLocaleLowerCase() || 'on'}
       />
-      <datalist id="datalist">
-        {countries.map((country) => (
-          <option key={country} value={country}>
-            {country}
-          </option>
-        ))}
-      </datalist>
       <p className="form__element-error">{error}</p>
     </div>
   );
 }
 
-export default CountrySelector;
+export default InputBlock;

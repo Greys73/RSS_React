@@ -8,7 +8,7 @@ export const initialState: IFormData[] = [
     email: 'user@mail.com',
     password: '1Aa#',
     confirmPass: '1Aa#',
-    gender: 'male',
+    gender: 'Male',
     accept: false,
     picture: '',
     country: 'Argentina',

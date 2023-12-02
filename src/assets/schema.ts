@@ -48,7 +48,7 @@ const schema = yup.object().shape({
     )
     .test(
       'fileExt',
-      'File extension should be png or jpg/jpeg',
+      'File should be png or jpg/jpeg',
       (files) =>
         files &&
         fileExtCheck({ files, extentions: ['image/png', 'image/jpeg'] })
