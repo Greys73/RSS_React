@@ -1,45 +1,73 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+import './FormsCollection.css';
+import { useEffect, useState } from 'react';
 import { useAppSelector } from '../../hooks';
 
 function FormsCollection() {
-  const forms = useAppSelector((store) => store.formData);
-  if (forms.length <= 1) return <p>No one form!</p>;
+  const cards = useAppSelector((store) => store.formData);
+
+  const styles = {
+    grey: { background: 'lightgrey' },
+    green: { background: 'lightgreen' },
+  };
+
+  const [mark, setMark] = useState(styles.grey);
+  useEffect(() => {
+    setMark(styles.green);
+    setTimeout(() => {
+      setMark(styles.grey);
+    }, 700);
+  }, []);
+
+  if (cards.length <= 1) return <p>Store is empty!</p>;
   return (
-    <>
-      {forms.map((form, id) => (
-        <div key={id}>
-          <div>{form.type}</div>
-          <div>
-            <img src={form.picture} alt={form.name} />
-          </div>
-          <ul>
-            <li>
-              <span>Name: </span>
-              <span>{form.name}</span>
-            </li>
-            <li>
-              <span>Age: </span>
-              <span>{form.age}</span>
-            </li>
-            <li>
-              <span>Gender: </span>
-              <span>{form.gender}</span>
-            </li>
-            <li>
-              <span>Country: </span>
-              <span>{form.country}</span>
-            </li>
-            <li>
-              <span>Email: </span>
-              <span>{form.email}</span>
-            </li>
-            <li>
-              <span>Password: </span>
-              <span>{form.password}</span>
-            </li>
-          </ul>
-        </div>
-      ))}
-    </>
+    <div className="cards-container">
+      {cards
+        .map((card, id) =>
+          id === 0 ? null : (
+            <div
+              className="card"
+              key={id}
+              style={id === cards.length - 1 ? mark : styles.grey}
+            >
+              <div className="card__image">
+                <img src={card.picture} alt={card.name} />
+              </div>
+              <ul className="card__list">
+                <li className="card__list__item">
+                  <span className="card__list__item__title">Name: </span>
+                  <span className="card__list__item__value">{card.name}</span>
+                </li>
+                <li className="card__list__item">
+                  <span className="card__list__item__title">Age: </span>
+                  <span className="card__list__item__value">{card.age}</span>
+                </li>
+                <li className="card__list__item">
+                  <span className="card__list__item__title">Gender: </span>
+                  <span className="card__list__item__value">{card.gender}</span>
+                </li>
+                <li className="card__list__item">
+                  <span className="card__list__item__title">Country: </span>
+                  <span className="card__list__item__value">
+                    {card.country}
+                  </span>
+                </li>
+                <li className="card__list__item">
+                  <span className="card__list__item__title">Email: </span>
+                  <span className="card__list__item__value">{card.email}</span>
+                </li>
+                <li className="card__list__item">
+                  <span className="card__list__item__title">Password: </span>
+                  <span className="card__list__item__value">
+                    {card.password}
+                  </span>
+                </li>
+              </ul>
+            </div>
+          )
+        )
+        .reverse()}
+    </div>
   );
 }
 

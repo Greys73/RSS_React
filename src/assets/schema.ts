@@ -9,7 +9,11 @@ const schema = yup.object().shape({
     .required(REQUIRED_MSG)
     .matches(/^[A-ZА-ЯЁ]/, 'First letter should be uppercased'),
 
-  age: yup.number().required(REQUIRED_MSG).min(0, 'Shoul be positive number'),
+  age: yup
+    .number()
+    .typeError('Should be a number')
+    .required(REQUIRED_MSG)
+    .min(0, 'Should be positive number'),
 
   email: yup
     .string()
