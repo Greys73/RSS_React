@@ -4,11 +4,15 @@ import FormsCollection from '../../Components/FormsCollection/FormsCollection';
 function MainPage() {
   return (
     <div>
-      <header>
-        <Link to="useref">Uncontrolled</Link>
-        <Link to="usestate">Controlled</Link>
+      <header className="main-header">
+        <Link className="main-header__link" to="useref">
+          Uncontrolled Form
+        </Link>
+        <Link className="main-header__link" to="usehook">
+          Controlled Form
+        </Link>
       </header>
-      <main>
+      <main className="main">
         <FormsCollection />
       </main>
     </div>

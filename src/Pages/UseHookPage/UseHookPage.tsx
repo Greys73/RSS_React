@@ -1,14 +1,14 @@
+import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useNavigate } from 'react-router-dom';
+import { useAppDispatch } from '../../hooks';
 import { initialState, setFormData } from '../../store/features/formDataSlice';
 import schema from '../../assets/schema';
-import CountrySelector from '../../Components/CountrySelector/CountrySelector';
 import imageToBase64 from '../../utils/imageToBase64';
-import { useAppDispatch } from '../../hooks';
 import InputBlock from '../../Components/InputBlock/InputBlock';
+import CountrySelector from '../../Components/CountrySelector/CountrySelector';
 
-function UseStatePage() {
+function UseHookPage() {
   const dispatch = useAppDispatch();
   const location = useNavigate();
 
@@ -26,7 +26,7 @@ function UseStatePage() {
     const image = await imageToBase64(data.picture![0]);
     const resultData = { ...data, picture: image };
     dispatch(setFormData(resultData));
-    location('/', { state: { from: 'usestate' } });
+    location('/', { state: { from: 'useshook' } });
   });
 
   return (
@@ -57,6 +57,7 @@ function UseStatePage() {
             label="Password"
             type="text"
             error={errors.password?.message}
+            strength
           />
           <InputBlock
             useForm={register('confirmPass')}
@@ -97,4 +98,4 @@ function UseStatePage() {
     </>
   );
 }
-export default UseStatePage;
+export default UseHookPage;

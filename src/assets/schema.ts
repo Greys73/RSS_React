@@ -29,11 +29,9 @@ const schema = yup.object().shape({
     .matches(/[^A-ZА-ЯЁa-zа-яё0-9\s]/, 'Should contains special character'),
   confirmPass: yup
     .string()
+    .label('confirm password')
     .required(REQUIRED_MSG)
-    .matches(/[0-9]/, 'Should contains number')
-    .matches(/[A-ZА-ЯЁ]/, 'Should contains Uppercase letter')
-    .matches(/[a-zа-яё]/, 'Should contains lowercase letter')
-    .matches(/[^A-ZА-ЯЁa-zа-яё0-9\s]/, 'Should contains special character'),
+    .oneOf([yup.ref('password')], 'Passwords must match'),
 
   gender: yup.string().required(REQUIRED_MSG),
 

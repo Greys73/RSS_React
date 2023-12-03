@@ -16,10 +16,10 @@ function FormsCollection() {
     setMark(styles.green);
     setTimeout(() => {
       setMark(styles.grey);
-    }, 700);
+    }, 1500);
   }, []);
 
-  if (cards.length <= 1) return <p>Store is empty!</p>;
+  if (cards.length <= 1) return <h3>Store is empty!</h3>;
   return (
     <div className="cards-container">
       {cards

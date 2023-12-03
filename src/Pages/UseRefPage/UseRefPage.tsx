@@ -1,12 +1,12 @@
+import { useNavigate } from 'react-router-dom';
 import { FormEvent, useRef, useState } from 'react';
 import { ValidationError } from 'yup';
-import { useNavigate } from 'react-router-dom';
+import { useAppDispatch } from '../../hooks';
 import { setFormData } from '../../store/features/formDataSlice';
 import schema from '../../assets/schema';
+import InputBlock from '../../Components/InputBlock/InputBlock';
 import CountrySelector from '../../Components/CountrySelector/CountrySelector';
 import imageToBase64 from '../../utils/imageToBase64';
-import { useAppDispatch } from '../../hooks';
-import InputBlock from '../../Components/InputBlock/InputBlock';
 
 function UseRefPage() {
   const dispatch = useAppDispatch();
@@ -100,6 +100,7 @@ function UseRefPage() {
             type="text"
             error={errors.password?.message}
             useRef={passwordRef}
+            strength
           />
           <InputBlock
             label="Confirm password"

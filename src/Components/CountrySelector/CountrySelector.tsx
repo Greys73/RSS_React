@@ -15,13 +15,12 @@ function CountrySelector({ useForm, useRef, label, error }: TProps) {
   return (
     <div className="form__element">
       <p className="form__element-label">{label}:</p>
-      <input
-        type="text"
-        list="datalist"
-        {...useForm}
-        ref={useRef}
-        autoComplete="on"
-      />
+      {useRef ? (
+        <input type="text" list="datalist" ref={useRef} autoComplete="on" />
+      ) : (
+        <input type="text" list="datalist" {...useForm} autoComplete="on" />
+      )}
+
       <datalist id="datalist">
         {countries.map((country) => (
           <option key={country} value={country}>
