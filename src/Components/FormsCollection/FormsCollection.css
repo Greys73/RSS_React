@@ -1,0 +1,44 @@
+.cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 100%;
+  font-family: 'Courier New', Courier, monospace;
+  margin: 2rem;
+}
+.card {
+  display: flex;
+  min-width: 20rem;
+  max-width: 25rem;
+  margin: 0.5rem;
+  border: 1px black solid;
+  box-sizing: border-box;
+  border-radius: 5px;
+  padding: 0.5rem;
+  background-color: lightgray;
+  transition: all 1s ease-out;
+}
+.card__image {
+  display: flex;
+  align-items: center;
+  margin-right: 0.5rem;
+  gap: 1rem;
+  max-width: 30%;
+}
+.card__image img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+}
+.card__list {
+  list-style-type: none;
+}
+.card__list__item {
+  margin-top: 0.5rem;
+}
+.card__list__item__title {
+  font-weight: bold;
+}
+.card__list__item__value {
+  font-style: italic;
+}
