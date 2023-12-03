@@ -3,11 +3,11 @@ import IFormData from '../../assets/types';
 
 export const initialState: IFormData[] = [
   {
-    name: 'Name',
+    name: '',
     age: 0,
-    email: 'user@mail.com',
-    password: '1Aa#',
-    confirmPass: '1Aa#',
+    email: '',
+    password: '',
+    confirmPass: '',
     gender: 'Male',
     accept: false,
     picture: '',
